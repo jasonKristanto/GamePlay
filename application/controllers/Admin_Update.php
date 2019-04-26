@@ -28,19 +28,19 @@ class Admin_Update extends CI_Controller {
 		else if ($this->input->post('Update')){
 			// echo "<pre>";
 			// print_r($_POST);
-			// echo "</pre>";					
+			// echo "</pre>";
 
-	  		echo "<pre>";
+	  	echo "<pre>";
 			print_r($_FILES);
 			echo "</pre>";
 
 			$product = $this->Admin_Update_Model->get_product($_GET['id']);
-	        
-        	$sizeCheckBox = count($this->input->post('update_genre'));
+
+      $sizeCheckBox = count($this->input->post('update_genre'));
 
 			$arr = "";
 
-			for ($i=0; $i < $sizeCheckBox; $i++) { 
+			for ($i=0; $i < $sizeCheckBox; $i++) {
 				if($arr > 0){
 					$arr .= ";";
 				}
@@ -96,7 +96,7 @@ class Admin_Update extends CI_Controller {
 		        	echo "<pre>";
 					print_r($this->upload->display_errors());
 					echo "</pre>";
-		        }				
+		        }
 			}
 
 			$this->Admin_Update_Model->update($values);

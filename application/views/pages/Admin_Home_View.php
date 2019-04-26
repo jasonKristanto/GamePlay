@@ -13,10 +13,10 @@
 
 		<h1 class="text-center"> GamePlay <br> Content Management System </h1>
 
-		<div class="container-fluid" >			
+		<div class="container-fluid" >
 			<form align="right" style="margin-top:5px;margin-bottom:5px;" action="Admin_Insert" method="POST">
 				<input type="submit" name="Insert" value="Insert Product" class="btn btn-primary">
-			</form>					
+			</form>
 
 			<table id="myTable" class="table table-striped table-bordered" style="width:100%">
 				<thead>
@@ -24,7 +24,7 @@
 					<th class="text-center">Product Name</th>
 					<th class="text-center">Picture</th>
 					<th class="text-center">Description</th>
-					<th class="text-center">Developer</th>					
+					<th class="text-center">Developer</th>
 					<th class="text-center">Genre</th>
 					<th class="text-center">Price</th>
 					<th class="text-center">Stock</th>
@@ -53,7 +53,7 @@
 								}
 								else {
 									echo "<td class='text-center'  style='vertical-align:middle;'>" . $product_desc . "</td>";
-								}								
+								}
 
 								echo "<td class='text-center'  style='vertical-align:middle;'>" . $product_dev . "</td>";
 
@@ -77,12 +77,12 @@
 
 								echo "</td>";
 
-								echo "<td class='text-center' style='vertical-align:middle;'>" . $product_price . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($product_price,2) . "</td>";
 								echo "<td class='text-center' style='vertical-align:middle;'>" . $product_stock . "</td>";
-								echo "<td style=\"vertical-align:middle;>";
-									echo "<form action=\"Admin_Update?product_id=" . $product_id . "\" method=\"POST\">
-											<input type=\"submit\" name=\"Update\" value=\"Update Product\" class=\"btn btn-warning\">
-										  </form><br>";
+								echo "<td style=\"vertical-align:middle\";>";
+									echo "<form action=\"Admin_Update?product_id=" . $product_id . "\" method=\"POST\">";
+											echo "<input type=\"submit\" name=\"Update\" value=\"Update Product\" class=\"btn btn-warning\">";
+									echo "</form><br>";
 								echo "</td>";
 							echo "</tr>";
 						}
@@ -93,14 +93,14 @@
 					<th class="text-center">Product Name</th>
 					<th class="text-center">Picture</th>
 					<th class="text-center">Description</th>
-					<th class="text-center">Developer</th>					
+					<th class="text-center">Developer</th>
 					<th class="text-center">Genre</th>
 					<th class="text-center">Price</th>
 					<th class="text-center">Stock</th>
 					<th class="text-center">Action</th>
 				</tfoot>
 			</table>
-		</div>	
+		</div>
 
 		<script type="text/javascript">
 			$(document).ready(function() {
