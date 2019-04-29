@@ -9,9 +9,9 @@
 		<title>Update Product</title>
 	</head>
 	<body>
-		<?php 
-			echo $header; 
-			$genreID = explode(";", $product[0]['genreID']); 
+		<?php
+			echo $header;
+			$genreID = explode(";", $product[0]['genreID']);
 		?>
 
 		<form class="form-group" method="POST" action="Admin_Update/update_action?id=<?php echo $product[0]['ID']; ?>" enctype="multipart/form-data">
@@ -50,21 +50,21 @@
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-				    <label class="col-sm-2 col-form-label" for="update_genre">Genre</label>	
-				    <div class="col-sm-4" style="width:50%;">			    
-				    	<?php	
+				    <label class="col-sm-2 col-form-label" for="update_genre">Genre</label>
+				    <div class="col-sm-4" style="width:50%;">
+				    	<?php
 					      	foreach ($genre as $row) {
-					      		$cek = 0;	
+					      		$cek = 0;
 					      		for($i=0; $i < sizeof($genreID); $i++){
 					      			if($genreID[$i] == $row['ID']){
 					      				echo "<input type=\"checkbox\" name=\"update_genre[]\" value=\"" . $row['genre'] . "\" checked>" . ucwords($row['genre']) . "<br>";
 					      				$cek = 1;
 					      				break;
-					      			}				      			
-					      		}	
+					      			}
+					      		}
 					      		if($cek == 0){
-					      			echo "<input type=\"checkbox\" name=\"update_genre[]\" value=\"" . $row['genre'] . "\">" . ucwords($row['genre']) . "<br>";	
-					      		}					      		
+					      			echo "<input type=\"checkbox\" name=\"update_genre[]\" value=\"" . $row['genre'] . "\">" . ucwords($row['genre']) . "<br>";
+					      		}
 					      	}
 				    	?>
 				    </div>
@@ -99,7 +99,7 @@
 					<label for="update_file" class="col-sm-2 col-form-label">Product Image</label>
 					<div class="col-sm-4" style="width:50%;">
 						<input type="file" class="form-control-file" name="update_file">
-					</div>				
+					</div>
 				</div>
 
 				<div class="form-group row">
@@ -112,9 +112,5 @@
 				</div>
 			</div>
 		</form>
-
-		<script type="text/javascript">
-			
-		</script>
 	</body>
 </html>

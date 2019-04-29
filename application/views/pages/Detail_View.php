@@ -21,16 +21,14 @@
 				</div>
 			</div>
 			<div class="col-8">
-				<h2 class="text-center"><?php echo $product[0]['productName']; ?></h2>					
+				<h2 class="text-center"><?php echo $product[0]['productName']; ?></h2>
 
 				<h4 class="text-center"> Released: <br> <?php echo $product[0]['price']; ?></h4>
 				<h4 class="text-center"> Director: <br> <?php echo $product[0]['developer']; ?></h4>
 
 				<div align="center" style="margin: auto; width: 50%;"><a href="<?php echo base_url(); ?>"><button class="btn btn-primary">Back</button></a></div>
 			</div>
-		</div>
-
-		
+		</div>	
 
 		<?php echo $footer; ?>
 

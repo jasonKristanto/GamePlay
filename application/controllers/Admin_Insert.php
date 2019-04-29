@@ -30,17 +30,17 @@ class Admin_Insert extends CI_Controller {
 			$sizeCheckBox = count($this->input->post('insert_genre'));
 
 			$config['upload_path']          = './assets/pict_product/';
-	        $config['allowed_types']        = 'jpg|png|';
+	    $config['allowed_types']        = 'jpg|png|';
 
-	        $this->load->library("upload", $config);
-	        $this->upload->initialize($config);
+      $this->load->library("upload", $config);
+      $this->upload->initialize($config);
 
-	        $proses = $this->upload->do_upload('insert_file');
+      $proses = $this->upload->do_upload('insert_file');
 
-	        $arr = "";
-	        
-	        if($proses){
-				for ($i=0; $i < $sizeCheckBox; $i++) { 
+      $arr = "";
+
+	    if($proses){
+				for ($i=0; $i < $sizeCheckBox; $i++) {
 					if($arr > 0){
 						$arr .= ";";
 					}
@@ -73,7 +73,6 @@ class Admin_Insert extends CI_Controller {
 			else {
 				redirect(base_url() . 'Admin');
 			}
-			
 		}
 	}
 }

@@ -42,7 +42,7 @@
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
 				    <label class="col-sm-2 col-form-label" for="insert_genre">Genre</label>
-				    <div class="col-sm-4" style="width:50%;">				    
+				    <div class="col-sm-4" style="width:50%;">
 				    	<?php
 					      	foreach ($genre as $row) {
 					      		echo "<input type=\"checkbox\" name=\"insert_genre[]\" value=\"" . $row['genre'] . "\">" . ucwords($row['genre']) . "<br>";
@@ -72,8 +72,8 @@
 					<label for="insert_file" class="col-sm-2 col-form-label">Product Image</label>
 					<div class="col-sm-4" style="width:50%;">
 						<input type="file" class="form-control-file" name="insert_file">
-					</div>				
-				</div>	
+					</div>
+				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
@@ -82,12 +82,8 @@
 						<input class="btn btn-primary" type="submit" name="Submit" value="Submit">
 						<input class="btn btn-danger" type="submit" name="Cancel" value="Cancel">
 					</div>
-				</div>			
+				</div>
 			</div>
 		</form>
-
-		<script type="text/javascript">
-			
-		</script>
 	</body>
 </html>

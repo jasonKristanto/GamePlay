@@ -11,15 +11,15 @@
 	<body>
 		<?php echo $header; ?>
 
-		<div class="container-fluid" >			
+		<div class="container-fluid" >
 			<form class="form-group" method="POST" action="Admin_Delete/delete_action">
 			<div class="form-group">
-				<h3 class="text-center"> 
-					Apakah Anda yakin ingin menghapus produk 
-					<?php echo $product[0]['productName']; ?> dari daftar produk? 
-				</h3> 
+				<h3 class="text-center">
+					Apakah Anda yakin ingin menghapus produk
+					<?php echo $product[0]['productName']; ?> dari daftar produk?
+				</h3>
 
-				<br>				
+				<br>
 
 				<input type="hidden" class="form-control" name="delete_id" value="<?php echo $product[0]['ID']; ?>">
 
@@ -28,15 +28,9 @@
 						<input class="btn btn-primary" type="submit" name="Delete" value="Delete">
 						<input class="btn btn-danger" type="submit" name="Cancel" value="Cancel">
 					</div>
-				</div>	
+				</div>
 			</div>
 		</form>
-		</div>	
-
-		<script type="text/javascript">
-			$(document).ready(function() {
-				
-			});
-		</script>
+		</div>
 	</body>
 </html>
