@@ -14,6 +14,7 @@ class Admin_User extends CI_Controller {
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/Admin_header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/Admin_footer.php', NULL, TRUE);
+		$data['sidebar'] = $this->load->view('pages/Admin_sidebar.php', NULL, TRUE);
 
 		$data['users'] = $this->Admin_User_Model->get_users();
 

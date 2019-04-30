@@ -14,6 +14,7 @@ class Admin_Update extends CI_Controller {
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/Admin_header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/Admin_footer.php', NULL, TRUE);
+		$data['sidebar'] = $this->load->view('pages/Admin_sidebar.php', NULL, TRUE);
 
 		$data['product'] = $this->Admin_Update_Model->get_product($_GET['product_id']);
 		$data['genre'] = $this->Admin_Update_Model->get_genre();
