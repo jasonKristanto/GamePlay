@@ -42,7 +42,7 @@
 
 								$username = "";
 
-								for ($i=0; $i < strlen($user_username); $i++) {
+								for ($i=0; $i < 13; $i++) {
 									if($i < 2){
 										$username .= $user_username[$i];
 									}
