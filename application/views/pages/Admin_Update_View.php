@@ -8,11 +8,25 @@
 
 		<title>Update Product</title>
 	</head>
-	<body>
-		<?php
-			echo $header;
-			$genreID = explode(";", $product[0]['genreID']);
+    <body class="bgGrey">
+    <div id="wrapper">
+		
+		<?php 
+			echo $sidebar;
+			echo $header; 
 		?>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Insert New Product</h3>
+                    </div>
+                    <div class="box-body">
+						
+						<?php
+							$genreID = explode(";", $product[0]['genreID']);
+						?>
 
 		<form class="form-group" method="POST" action="Admin_Update/update_action?id=<?php echo $product[0]['ID']; ?>" enctype="multipart/form-data">
 			<div class="form-group">
@@ -88,17 +102,17 @@
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-					<label for="poster" class="col-sm-2 col-form-label">Current Poster</label>
+					<label for="poster" class="col-sm-2 col-form-label">Image Preview</label>
 					<div class="col-sm-4" style="width:50%;">
-						<img style="width: 20%;" src="<?php echo base_url('assets/pict_product/') . $product[0]['picture']; ?>">
+						<img id="imgPreview" style="max-width: 100px;" src="<?php echo base_url('assets/pict_product/') . $product[0]['picture']; ?>" />
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-					<label for="update_file" class="col-sm-2 col-form-label">Product Image</label>
+					<label for="update_file" class="col-sm-2 col-form-label">Upload Image</label>
 					<div class="col-sm-4" style="width:50%;">
-						<input type="file" class="form-control-file" name="update_file">
+						<input id='imgInput' type="file" class="form-control-file" name="update_file">
 					</div>
 				</div>
 
@@ -112,5 +126,35 @@
 				</div>
 			</div>
 		</form>
-	</body>
+
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+    <script>
+		function imgChange(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#imgPreview').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+        $(".menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+
+		$("#imgInput").change(function() {
+			imgChange(this);
+		});
+    </script>
 </html>
+

@@ -8,12 +8,22 @@
 
 		<title>GamePlay Admin</title>
 	</head>
-	<body>
-		<?php echo $header; ?>
+	<body class="bgGrey">
+    <div id="wrapper">
+		
+		<?php 
+			echo $sidebar;
+			echo $header; 
+		?>
 
-		<h1 class="text-center"> GamePlay <br> Content Management System </h1>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">User Table</h3>
+                    </div>
+                    <div class="box-body">
 
-		<div class="container-fluid" >
 			<table id="myTable" class="table table-striped table-bordered" style="width:100%">
 				<thead>
 					<th class="text-center">ID</th>
@@ -80,12 +90,28 @@
 					<th class="text-center">Kota</th>
 				</tfoot>
 			</table>
-		</div>
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('#myTable').DataTable();
-			});
-		</script>
-	</body>
+										</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+    <script>
+        $(".menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        $(function () {
+            $("#myTable").DataTable({
+				"paging": true,
+				"lengthChange": true,
+				"searching": true,
+				"ordering": true,
+				"info": true,
+				"autoWidth": false
+			}
+		);});
+    </script>
 </html>
