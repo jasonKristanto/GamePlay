@@ -8,11 +8,13 @@
 	</head>
 	<body>
     <?php
-      if(isset($_GET['status'])){
-        if($_GET['status'] == 'gagal'){
-          echo "<script>alert(\"Username dan/atau Password Salah\")</script>";
-        }
-      }
+      // if(isset($_GET['status'])){
+      //   if($_GET['status'] == 'gagal'){
+      //     echo "<script>alert(\"Username dan/atau Password Salah\")</script>";
+			// 		unset($_GET['status']);
+			// 		redirect(base_url() . "Login");
+      //   }
+      // }
     ?>
 
     <form class="form-signin" method="post" action="Login/login">

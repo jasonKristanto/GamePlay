@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 19, 2019 at 10:46 AM
--- Server version: 10.2.3-MariaDB-log
--- PHP Version: 7.1.1
+-- Host: localhost:3306
+-- Generation Time: Apr 30, 2019 at 05:09 PM
+-- Server version: 5.7.19
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `uaspemweb`
+-- Database: `gameplay`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `username` varchar(10) NOT NULL,
+  `password` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`username`, `password`) VALUES
+('admin', 'admin'),
+('admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -30,7 +49,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `genre` (
   `ID` int(11) NOT NULL,
-  `genre` varchar(255) NOT NULL
+  `genre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -38,7 +57,7 @@ CREATE TABLE `genre` (
 --
 
 INSERT INTO `genre` (`ID`, `genre`) VALUES
-(2, 'action'),
+(1, 'action'),
 (2, 'adventure'),
 (3, 'music');
 
@@ -55,16 +74,20 @@ CREATE TABLE `product` (
   `stock` int(11) NOT NULL,
   `picture` varchar(255) NOT NULL,
   `developer` varchar(255) NOT NULL,
-  `description` varchar(8000) NOT NULL
+  `description` varchar(8000) NOT NULL,
+  `genreID` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`ID`, `productName`, `price`, `stock`, `picture`, `developer`, `description`) VALUES
-(2, 'God of War', 600000, 6, 'asdasdasd/asdasdads', 'Santa Monica Studio', 'While the first seven games were loosely based on Greek mythology, this instalment takes the series to Norse mythology. Six of the nine realms of Norse mythology can be explored. Predating the Vikings, the majority of the game takes place in ancient Norway in the realm of Midgard, inhabited by humans and other creatures and is the same realm that the Greek world had existed in.'),
-(3, 'Project Diva Future Tone DX', 500000, 2, 'asdasdasd/asdasd', 'Sega', 'This version includes all previous songs (including DLC) alongside new content, including DECO*27\'s hit song \"Ghost Rule,\" two modules, one for the former song, and one to commemorate Hatsune Miku\'s 10th anniversary. Two editions will be released. A regular edition at 7,990 yen, and a Limited Edition (Memorial Pack) at 11,990 yen, which includes the game, 3 Blu Ray discs which consist of 200 promotional videos from the series\' history, and special box featuring an illustration created by long time Vocaloid artist KEI.');
+INSERT INTO `product` (`ID`, `productName`, `price`, `stock`, `picture`, `developer`, `description`, `genreID`) VALUES
+(1, 'God of War', 600000, 11, 'god_of_war1.jpg', 'Santa Monica Studio', 'While the first seven games were loosely based on Greek mythology, this instalment takes the series to Norse mythology. Six of the nine realms of Norse mythology can be explored. Predating the Vikings, the majority of the game takes place in ancient Norway in the realm of Midgard, inhabited by humans and other creatures and is the same realm that the Greek world had existed in.', '1;2'),
+(2, 'Project Diva Future Tone DX', 500000, 5, 'Project_Diva_Future_Tone_DX.jpg', 'Sega', 'This version includes all previous songs (including DLC) alongside new content, including DECO*27\'s hit song ', '3'),
+(3, 'adawda', 100000, 12, 'Kim_So_Hyun_(1)1.jpg', 'asdawd', 'adwad', '2;3'),
+(4, 'adawda', 121231, 123134, 'Kim_So_Hyun_(3).jpg', 'asdawd', 'adwad', '2;3'),
+(5, 'adawda', 121313, 12113, 'large.jpg', 'asdawd', 'adwad', '2');
 
 -- --------------------------------------------------------
 
@@ -73,18 +96,24 @@ INSERT INTO `product` (`ID`, `productName`, `price`, `stock`, `picture`, `develo
 --
 
 CREATE TABLE `user` (
+  `id` int(7) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `privilege` varchar(255) NOT NULL
+  `nama` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `picture` varchar(200) NOT NULL,
+  `alamat` varchar(200) NOT NULL,
+  `kota` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `password`, `privilege`) VALUES
-('admin', 'admin', 'admin'),
-('user', 'user', 'user');
+INSERT INTO `user` (`id`, `username`, `password`, `nama`, `email`, `picture`, `alamat`, `kota`) VALUES
+(1, 'jasonkristanto', 'JKristant0', 'Jason Kristanto', 'jasonkristanto@jasonkristanto.com', 'ArimaKousei.jpg', 'Ruko Pascal Timur No. 5, Tangerang, Banten', 'Tangerang'),
+(2, 'andi', 'andi', 'andi', 'andi@andi.com', 'SoraKeybladePose.jpg', 'Ruko Newton', 'Tangerang'),
+(3, 'susi', 'susi', 'susi', 'susi@susi.com', 'Kaori_Miyazono2.png', 'Ruko Dalton', 'Tangerang');
 
 --
 -- Indexes for dumped tables
@@ -94,8 +123,7 @@ INSERT INTO `user` (`username`, `password`, `privilege`) VALUES
 -- Indexes for table `genre`
 --
 ALTER TABLE `genre`
-  ADD PRIMARY KEY (`genre`),
-  ADD KEY `ID` (`ID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `product`
@@ -104,24 +132,32 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `genre`
+--
+ALTER TABLE `genre`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `user`
 --
-
---
--- Constraints for table `genre`
---
-ALTER TABLE `genre`
-  ADD CONSTRAINT `genre_ibfk_1` FOREIGN KEY (`ID`) REFERENCES `product` (`ID`);
+ALTER TABLE `user`
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
