@@ -10,15 +10,30 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
+		
+		if(!$this->session->userdata('admin')) $this->session->set_userdata('admin', false);
+		$admin['login'] = $this->session->userdata('admin');
+		
 		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/Admin_header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/Admin_footer.php', NULL, TRUE);
 		$data['sidebar'] = $this->load->view('pages/Admin_sidebar.php', NULL, TRUE);
+		$data['login'] = $this->load->view('pages/Admin_login.php', $admin, TRUE);
 
 		$data['product'] = $this->Admin_Home_Model->get_product();
 		$data['genre'] = $this->Admin_Home_Model->get_genre();
 
 		$this->load->view('pages/Admin_Home_View.php', $data);
+	}
+
+	public function login(){
+		$this->session->set_userdata('admin', true);
+		redirect('Admin');
+	}
+
+	public function logout(){
+		$this->session->set_userdata('admin', false);
+		redirect('Admin');
 	}
 }

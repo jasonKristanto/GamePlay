@@ -2,6 +2,11 @@
     background-color: #EBF0F3;
 }
 
+.btnx{
+    width:100%;
+    border-radius:3px;
+}
+
 .box{
     position: relative;
     border-radius: 3px;
@@ -10,6 +15,7 @@
     margin-bottom: 20px;
     width: 100%;
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-radius: 3px;
 }
 
 .box-header {
@@ -162,20 +168,33 @@
     background: #17598C;
 }
 
-.navbar-togglex {
+.navbarx .navbar-toggle {
     display: block;
     background-color: #DDDDDD;
 }
 
-.navbar-headerx {
+.navbarx .headerx {
     float: left;
     padding: 15px;
     text-align: center;
     width: 100%;
 }
 
-.navbar-brandx {
+.navbarx .navbar-brand {
     float:none;
+}
+
+.navbarx .navbar-nav>li>a,
+.navbarx .navbar-nav>li>a:focus, 
+.navbarx .navbar-nav>li>a:hover{
+    color: #FFF;
+}
+
+.navbarx .navbar-nav>.open>a, 
+.navbarx .navbar-nav>.open>a:focus, 
+.navbarx .navbar-nav>.open>a:hover{
+    color: #FFF;
+    background: #146ab1;
 }
 
 .activex{
@@ -185,3 +204,40 @@
 .activex a{
     color: #EFEFEF;
 }
+
+.centered-modal.in {
+    display: flex !important;
+}
+.centered-modal .modal-dialog {
+    margin: auto;
+}
+
+.modal-contentx  {
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 1px; 
+}
+
+.modal-contentx input[type=text], input[type=password] {
+    height: 44px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-top: 1px solid #c0c0c0;
+    /* border-radius: 2px; */
+    padding: 0 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border-radius: 1px; 
+  }
+
+  .modal-contentx input[type=text]:hover, input[type=password]:hover {
+    border: 1px solid #b9b9b9;
+    border-top: 1px solid #a0a0a0;
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  }

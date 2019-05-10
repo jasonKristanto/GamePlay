@@ -12,6 +12,7 @@
     <div id="wrapper">
 
 		<?php 
+			echo $login;
 			echo $sidebar;
 			echo $header; 
 		?>
@@ -19,7 +20,7 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
 				<form action="Admin_Insert" method="POST">
-					<input type="submit" name="Insert" value="Insert Product" class="btn btn-block btn-primary btn-lg">
+					<input type="submit" name="Insert" value="Insert Product" class="btn btn-block btn-primary btn-lg btnx">
 				</form>
 
                 <div class="box">
