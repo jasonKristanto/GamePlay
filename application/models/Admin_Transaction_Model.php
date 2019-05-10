@@ -1,5 +1,5 @@
 <?php
-	class Admin_Transaction_Model extends CI_Controller {
+	class Admin_Transaction_Model extends CI_Model {
     
 	}
 ?>

@@ -1,5 +1,5 @@
 <?php
-	class Detail_Model extends CI_Controller {
+	class Detail_Model extends CI_Model {
 
 		public function get_product($id){
 			$this->db->where('id', $id);

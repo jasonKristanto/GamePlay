@@ -1,5 +1,5 @@
 <?php
-	class Admin_Update_Model extends CI_Controller {
+	class Admin_Update_Model extends CI_Model {
 		public function update($data){
 			$this->db->replace('product', $data);
 		}

@@ -1,5 +1,5 @@
 <?php
-	class Admin_Home_Model extends CI_Controller {
+	class Admin_Home_Model extends CI_Model {
 
 		public function get_product(){
 			$query = $this->db->query("SELECT * FROM product");

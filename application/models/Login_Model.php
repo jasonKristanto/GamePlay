@@ -1,5 +1,5 @@
 <?php
-	class Login_Model extends CI_Controller {
+	class Login_Model extends CI_Model {
 
 		public function get_user($user, $pass){
       $this->db->where('username', $user);

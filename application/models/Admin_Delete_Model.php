@@ -1,5 +1,5 @@
 <?php
-	class Admin_Delete_Model extends CI_Controller {
+	class Admin_Delete_Model extends CI_Model {
 		public function delete($id){
 			$this->db->where('ID', $id);
 			$this->db->delete('product');

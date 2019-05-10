@@ -1,5 +1,5 @@
 <?php
-	class Admin_Insert_Model extends CI_Controller {
+	class Admin_Insert_Model extends CI_Model {
 		public function insert($values){
 			$this->db->insert('product', $values);
 		}
