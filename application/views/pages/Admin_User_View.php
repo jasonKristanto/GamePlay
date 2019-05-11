@@ -10,10 +10,10 @@
 	</head>
 	<body class="bgGrey">
     <div id="wrapper">
-		
-		<?php 
+
+		<?php
 			echo $sidebar;
-			echo $header; 
+			echo $header;
 		?>
 
         <div id="page-content-wrapper">
@@ -33,7 +33,6 @@
 					<th class="text-center">Email</th>
           <th class="text-center">Picture</th>
 					<th class="text-center">Alamat</th>
-					<th class="text-center">Kota</th>
 				</thead>
 				<tbody>
 					<?php
@@ -45,19 +44,24 @@
 							$user_name = $row['nama'];
 							$user_email = $row['email'];
 							$user_alamat = $row['alamat'];
-							$user_kota = $row['kota'];
 
 							echo "<tr>";
 								echo "<td class='text-center' style='vertical-align:middle;'>" . $user_id . "</td>";
 
 								$username = "";
+								$email = "";
+								$alamat = "";
 
 								for ($i=0; $i < 13; $i++) {
 									if($i < 2){
 										$username .= $user_username[$i];
+										$email .= $user_email[$i];
+										$alamat .= $user_alamat[$i];
 									}
 									else {
 										$username .= "*";
+										$email .= "*";
+										$alamat .= "*";
 									}
 								}
 
@@ -67,13 +71,11 @@
 
 								echo "<td class='text-center' style='vertical-align:middle;'>" . $user_name . "</td>";
 
-								echo "<td class='text-center' style='vertical-align:middle;'>" . $user_email . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>" . $email . "</td>";
 
                 echo "<td align='center'><img style=\"max-width: 100px;\" src='" . $user_picture . "'></td>";
 
-								echo "<td class='text-center' style='vertical-align:middle;'>" . $user_alamat . "</td>";
-
-                echo "<td class='text-center' style='vertical-align:middle;'>" . $user_kota . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>" . $alamat . "</td>";
 
 							echo "</tr>";
 						}
@@ -87,7 +89,6 @@
 					<th class="text-center">Email</th>
           <th class="text-center">Picture</th>
 					<th class="text-center">Alamat</th>
-					<th class="text-center">Kota</th>
 				</tfoot>
 			</table>
 

@@ -11,16 +11,32 @@ class Admin_Transaction extends CI_Controller {
 	public function index()
 	{
 		if(!$this->session->userdata('admin')) redirect(base_url() . 'Admin');
-		
+
 		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/Admin_header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/Admin_footer.php', NULL, TRUE);
 		$data['sidebar'] = $this->load->view('pages/Admin_sidebar.php', NULL, TRUE);
 
-		// $data['product'] = $this->Admin_Home_Model->get_product();
-		// $data['genre'] = $this->Admin_Home_Model->get_genre();
+		$data['transaction'] = $this->Admin_Transaction_Model->get_trans();
+
 
 		$this->load->view('pages/Admin_Transaction_View.php', $data);
+	}
+
+	public function trans_detail(){
+		if(!$this->session->userdata('admin')) $this->session->set_userdata('admin', false);
+		$admin['login'] = $this->session->userdata('admin');
+
+		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
+		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
+		$data['header'] = $this->load->view('pages/Admin_header.php', NULL, TRUE);
+		$data['footer'] = $this->load->view('pages/Admin_footer.php', NULL, TRUE);
+		$data['sidebar'] = $this->load->view('pages/Admin_sidebar.php', NULL, TRUE);
+		$data['login'] = $this->load->view('pages/Admin_login.php', $admin, TRUE);
+
+		$data['trans_detail'] = $this->Admin_Transaction_Model->get_trans_detail($_GET['id']);
+
+		$this->load->view('pages/Admin_Trans_Detail_View.php', $data);
 	}
 }

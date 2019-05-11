@@ -20,4 +20,24 @@ class Detail extends CI_Controller {
 
 		$this->load->view('pages/Detail_View.php', $data);
 	}
+
+	public function detail(){
+		if($this->input->post('Cancel')){
+			$_POST = NULL;
+			$_GET= NULL;
+			redirect(base_url());
+		}
+		else if($this->input->post('Buy')){
+			if(!isset($this->session->nama)){
+				redirect(base_url() . "Login");
+			}
+			redirect(base_url() . "Cart/insert_cart?id=" . $_POST['detail_ID'] . "&qty=" . $_POST['detail_qty'] . "&cart=1");
+		}
+		else if($this->input->post('Cart')){
+			if(!isset($this->session->nama)){
+				redirect(base_url() . "Login");
+			}
+			redirect(base_url() . "Cart/insert_cart?id=" . $_POST['detail_ID'] . "&qty=" . $_POST['detail_qty'] . "&cart=0");
+		}
+	}
 }

@@ -10,10 +10,10 @@
 	</head>
 	<body class="bgGrey">
     <div id="wrapper">
-		
-		<?php 
+
+		<?php
 			echo $sidebar;
-			echo $header; 
+			echo $header;
 		?>
 
         <div id="page-content-wrapper">
@@ -26,87 +26,54 @@
 
 			<table id="myTable" class="table table-striped table-bordered" style="width:100%">
 				<thead>
-					<th class="text-center">ID</th>
-					<th class="text-center">Product Name</th>
-					<th class="text-center">Picture</th>
-					<th class="text-center">Description</th>
-					<th class="text-center">Developer</th>
-					<th class="text-center">Genre</th>
-					<th class="text-center">Price</th>
-					<th class="text-center">Stock</th>
+					<th class="text-center">ID Transaction</th>
+					<th class="text-center">ID Customer</th>
+					<th class="text-center">Total Belanja</th>
+					<th class="text-center">Jenis Pengiriman</th>
+					<th class="text-center">Biaya Pengiriman</th>
+					<th class="text-center">Jenis Pembayaran</th>
+					<th class="text-center">Total Pembayaran</th>
 					<th class="text-center">Action</th>
 				</thead>
 				<tbody>
 					<?php
-						// foreach ($product as $row) {
-						// 	$product_id = $row['ID'];
-						// 	$product_name = $row['productName'];
-						// 	$product_pict = base_url('assets/pict_product/') . $row['picture'];
-						// 	$product_stock = $row['stock'];
-						// 	$product_price = $row['price'];
-						// 	$product_desc = $row['description'];
-						// 	$product_dev = $row['developer'];
-						// 	$genreID = explode(";", $row['genreID']);
-            //
-						// 	echo "<tr>";
-						// 		echo "<td class='text-center' style='vertical-align:middle;'>" . $product_id . "</td>";
-						// 		echo "<td class='text-center' style='vertical-align:middle;'>" . $product_name . "</td>";
-            //
-						// 		echo "<td ><img style=\"max-width: 100px;\" src='" . $product_pict . "'></td>";
-            //
-						// 		if(strlen($product_desc) > 100){
-						// 			echo "<td class='text-center'  style='vertical-align:middle;'>" . substr($product_desc, 0, 100) . "...</td>";
-						// 		}
-						// 		else {
-						// 			echo "<td class='text-center'  style='vertical-align:middle;'>" . $product_desc . "</td>";
-						// 		}
-            //
-						// 		echo "<td class='text-center'  style='vertical-align:middle;'>" . $product_dev . "</td>";
-            //
-						// 		echo "<td class='text-center'  style='vertical-align:middle;'>";
-            //
-						// 		for($i=0; $i < sizeof($genreID); $i++){
-						// 			if($genreID[$i] == 1){
-						// 				echo "Action";
-						// 			}
-						// 			else if($genreID[$i] == 2){
-						// 				echo "Adventure";
-						// 			}
-						// 			else if($genreID[$i] == 3){
-						// 				echo "Music";
-						// 			}
-            //
-						// 			if(!($i == sizeof($genreID)-1)){
-						// 				echo ", ";
-						// 			}
-						// 		}
-            //
-						// 		echo "</td>";
-            //
-						// 		echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($product_price,2) . "</td>";
-						// 		echo "<td class='text-center' style='vertical-align:middle;'>" . $product_stock . "</td>";
-						// 		echo "<td style=\"vertical-align:middle\";>";
-						// 			echo "<form action=\"Admin_Update?product_id=" . $product_id . "\" method=\"POST\">";
-						// 					echo "<input type=\"submit\" name=\"Update\" value=\"Update Product\" class=\"btn btn-warning\">";
-						// 			echo "</form><br>";
-						// 		echo "</td>";
-						// 	echo "</tr>";
-						// }
+						$total = 0;
+						foreach ($transaction as $row) {
+							$trans_id = $row['ID_trans'];
+							$trans_cust = $row['ID_cust'];
+							$trans_total = $row['total'];
+							$trans_biaya_kirim = $row['biaya_kirim'];
+							$trans_jenis_kirim = $row['jenis_kirim'];
+							$trans_jenis_pembayaran = $row['jenis_pembayaran'];
+							$trans_grand_total = $row['grand_total'];
+
+							$total += $trans_grand_total;
+
+							echo "<tr>";
+								echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_id . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_cust . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_total,2) . "</td>";
+								echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_kirim . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_biaya_kirim,2) . "</td>";
+								echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_pembayaran . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_grand_total,2) . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'><a href=\"" . base_url() . "Admin_Transaction/trans_detail?id=" . $trans_id . "\"><button style=\"margin:2px;\" class=\"btn btn-primary\">Detail</button></a></td>";
+							echo "</tr>";
+						}
 					?>
 				</tbody>
 				<tfoot>
-					<th class="text-center">ID</th>
-					<th class="text-center">Product Name</th>
-					<th class="text-center">Picture</th>
-					<th class="text-center">Description</th>
-					<th class="text-center">Developer</th>
-					<th class="text-center">Genre</th>
-					<th class="text-center">Price</th>
-					<th class="text-center">Stock</th>
+					<th class="text-center">ID Transaction</th>
+					<th class="text-center">ID Customer</th>
+					<th class="text-center">Total Belanja</th>
+					<th class="text-center">Jenis Pengiriman</th>
+					<th class="text-center">Biaya Pengiriman</th>
+					<th class="text-center">Jenis Pembayaran</th>
+					<th class="text-center">Rp. <?php echo number_format($total, 2); ?></th>
 					<th class="text-center">Action</th>
 				</tfoot>
 			</table>
-		
+
 										</div>
                 </div>
             </div>
@@ -131,4 +98,3 @@
 		);});
     </script>
 </html>
-

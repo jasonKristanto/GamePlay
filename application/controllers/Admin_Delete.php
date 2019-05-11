@@ -31,7 +31,8 @@ class Admin_Delete extends CI_Controller {
 		}
 		else if ($this->input->post('Delete')){
 			$this->Admin_Delete_Model->delete($this->input->post('delete_id'));
-			
+			$_POST = NULL;
+			$_GET= NULL;
 			redirect(base_url() . 'Admin');
 		}
 	}

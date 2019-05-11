@@ -11,10 +11,10 @@
 	<body class="bgGrey">
     <div id="wrapper">
 
-		<?php 
+		<?php
 			echo $login;
 			echo $sidebar;
-			echo $header; 
+			echo $header;
 		?>
 
         <div id="page-content-wrapper">
@@ -126,13 +126,20 @@
         });
         $(function () {
             $("#myTable").DataTable({
-				"paging": true,
-				"lengthChange": true,
-				"searching": true,
-				"ordering": true,
-				"info": true,
-				"autoWidth": false
-			}
-		);});
+						"paging": true,
+						"lengthChange": true,
+						"searching": true,
+						"ordering": true,
+						"info": true,
+						"autoWidth": false
+					}
+				);
+			});
     </script>
+
+		<style>
+			.modal-backdrop {
+					opacity:1 !important;
+			}
+		</style>
 </html>

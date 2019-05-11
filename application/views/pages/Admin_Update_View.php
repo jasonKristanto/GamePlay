@@ -10,10 +10,10 @@
 	</head>
     <body class="bgGrey">
     <div id="wrapper">
-		
-		<?php 
+
+		<?php
 			echo $sidebar;
-			echo $header; 
+			echo $header;
 		?>
 
         <div id="page-content-wrapper">
@@ -23,7 +23,7 @@
                         <h3 class="box-title">Insert New Product</h3>
                     </div>
                     <div class="box-body">
-						
+
 						<?php
 							$genreID = explode(";", $product[0]['genreID']);
 						?>
@@ -50,7 +50,7 @@
 					<label class="col-sm-2 col-form-label"></label>
 				    <label class="col-sm-2 col-form-label" for="update_desc">Description</label>
 				    <div class="col-sm-4" style="width:50%;">
-						<input type="text" class="form-control" name="update_desc" value="<?php echo $product[0]['description']; ?>">
+						<textarea class="form-control" name="update_desc" rows="5"><?php echo $product[0]['description']; ?></textarea>
 					</div>
 				</div>
 
@@ -157,4 +157,3 @@
 		});
     </script>
 </html>
-

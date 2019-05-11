@@ -11,7 +11,7 @@ class Admin_Update extends CI_Controller {
 	public function index()
 	{
 		if(!$this->session->userdata('admin')) redirect(base_url() . 'Admin');
-		
+
 		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/Admin_header.php', NULL, TRUE);
@@ -26,6 +26,9 @@ class Admin_Update extends CI_Controller {
 
 	public function update_action(){
 		if($this->input->post('Cancel')){
+			$_POST = NULL;
+			$_GET= NULL;
+			$_FILES = NULL;
 			redirect(base_url() . 'Admin');
 		}
 		else if ($this->input->post('Update')){
@@ -103,6 +106,10 @@ class Admin_Update extends CI_Controller {
 			}
 
 			$this->Admin_Update_Model->update($values);
+
+			$_POST = NULL;
+			$_GET= NULL;
+			$_FILES = NULL;
 
 			redirect(base_url() . 'Admin');
 		}

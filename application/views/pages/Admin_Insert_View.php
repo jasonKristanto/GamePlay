@@ -10,10 +10,10 @@
 	</head>
     <body class="bgGrey">
     <div id="wrapper">
-		
-		<?php 
+
+		<?php
 			echo $sidebar;
-			echo $header; 
+			echo $header;
 		?>
 
         <div id="page-content-wrapper">
@@ -28,53 +28,53 @@
 			<div class="form-group">
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-				    <label class="col-sm-2 col-form-label" for="insert_nama">Product Name</label>
-				    <div class="col-sm-4" style="width:50%;">
-					    <input type="text" class="form-control" name="insert_nama" placeholder="Product Name">
+			    <label class="col-sm-2 col-form-label" for="insert_nama">Product Name</label>
+			    <div class="col-sm-4" style="width:50%;">
+				    <input type="text" class="form-control" name="insert_nama" placeholder="Product Name">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-				    <label class="col-sm-2 col-form-label" for="insert_desc">Description</label>
-				    <div class="col-sm-4" style="width:50%;">
-					    <input type="text" class="form-control" name="insert_desc" placeholder="Description">
+			    <label class="col-sm-2 col-form-label" for="insert_desc">Description</label>
+			    <div class="col-sm-4" style="width:50%;">
+				    <input type="text" class="form-control" name="insert_desc" placeholder="Description">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-				    <label class="col-sm-2 col-form-label" for="insert_desc">Developer</label>
-				    <div class="col-sm-4" style="width:50%;">
-					    <input type="text" class="form-control" name="insert_dev" placeholder="Developer">
+			    <label class="col-sm-2 col-form-label" for="insert_desc">Developer</label>
+			    <div class="col-sm-4" style="width:50%;">
+				    <input type="text" class="form-control" name="insert_dev" placeholder="Developer">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-				    <label class="col-sm-2 col-form-label" for="insert_genre">Genre</label>
-				    <div class="col-sm-4" style="width:50%;">
-				    	<?php
-					      	foreach ($genre as $row) {
-					      		echo "<input type=\"checkbox\" name=\"insert_genre[]\" value=\"" . $row['genre'] . "\">" . ucwords($row['genre']) . "<br>";
-					      	}
-				    	?>
-				    </div>
+			    <label class="col-sm-2 col-form-label" for="insert_genre">Genre</label>
+			    <div class="col-sm-4" style="width:50%;">
+			    	<?php
+				      	foreach ($genre as $row) {
+				      		echo "<input type=\"checkbox\" name=\"insert_genre[]\" value=\"" . $row['genre'] . "\">" . ucwords($row['genre']) . "<br>";
+				      	}
+			    	?>
+			    </div>
 				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-				    <label class="col-sm-2 col-form-label" for="insert_stock">Stock</label>
-				    <div class="col-sm-4" style="width:50%;">
-					    <input type="number" class="form-control" name="insert_stock" placeholder="Stock">
+			    <label class="col-sm-2 col-form-label" for="insert_stock">Stock</label>
+			    <div class="col-sm-4" style="width:50%;">
+				    <input type="number" class="form-control" name="insert_stock" placeholder="Stock">
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label class="col-sm-2 col-form-label"></label>
-				    <label class="col-sm-2 col-form-label" for="insert_price">Price</label>
-				    <div class="col-sm-4" style="width:50%;">
-					    <input type="number" class="form-control" name="insert_price" placeholder="Price">
+			    <label class="col-sm-2 col-form-label" for="insert_price">Price</label>
+			    <div class="col-sm-4" style="width:50%;">
+				    <input type="number" class="form-control" name="insert_price" placeholder="Price">
 					</div>
 				</div>
 

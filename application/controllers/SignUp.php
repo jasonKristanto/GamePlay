@@ -19,31 +19,26 @@ class SignUp extends CI_Controller {
 	}
 
   public function signUp(){
-    if(isset($_POST['signup_username'])){
-      $values = array(
-        'username' => $this->input->post('signup_username'),
-        'password' => $this->input->post('signup_password'),
-        'nama' => $this->input->post('signup_nama'),
-        'email' => $this->input->post('signup_email'),
-        'alamat' => $this->input->post('signup_alamat'),
-        'kota' => $this->input->post('signup_kota')
-      );
+		if($this->input->post('Submit')){
+			if(strlen($this->input->post('signup_username')) != 0 && strlen($this->input->post('signup_password')) != 0 && strlen($this->input->post('signup_nama')) != 0 && strlen($this->input->post('signup_email')) != 0 && strlen($this->input->post('signup_alamat')) != 0){
+				$values = array(
+	        'username' => $this->input->post('signup_username'),
+	        'password' => $this->input->post('signup_password'),
+	        'nama' => $this->input->post('signup_nama'),
+	        'email' => $this->input->post('signup_email'),
+	        'alamat' => $this->input->post('signup_alamat')
+	      );
 
-      $this->SignUp_Model->insert_user($values);
-
+	      $this->SignUp_Model->insert_user($values);
+			}
+			$_POST = NULL;
+			$_GET= NULL;
       redirect(base_url());
     }
     else {
+			$_POST = NULL;
+			$_GET= NULL;
       redirect(base_url());
     }
-
-    // $user = $this->SignUp_Model->get_user($_POST['login_username'], $_POST['login_password']);
-    //
-    // if(empty($user)){
-    //   redirect(base_url() . 'Login/?status=gagal');
-    // }
-    // else {
-    //   redirect(base_url());
-    // }
   }
 }

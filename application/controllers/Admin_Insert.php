@@ -29,7 +29,7 @@ class Admin_Insert extends CI_Controller {
 			redirect(base_url() . 'Admin');
 		}
 		else if ($this->input->post('Submit')){
-			redirect(base_url() . 'Admin');
+			//redirect(base_url() . 'Admin');
 			$sizeCheckBox = count($this->input->post('insert_genre'));
 
 			$config['upload_path']          = './assets/pict_product/';
@@ -69,11 +69,21 @@ class Admin_Insert extends CI_Controller {
 					'genreID' => $arr
 				);
 
+				print_r($values);
+
 				$this->Admin_Insert_Model->insert($values);
+
+				$_POST = NULL;
+				$_GET= NULL;
+				$_FILES = NULL;
 
 				redirect(base_url() . 'Admin');
 			}
 			else {
+				$_POST = NULL;
+				$_GET= NULL;
+				$_FILES = NULL;
+
 				redirect(base_url() . 'Admin');
 			}
 		}

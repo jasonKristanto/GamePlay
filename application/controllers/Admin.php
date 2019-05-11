@@ -10,10 +10,9 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		
 		if(!$this->session->userdata('admin')) $this->session->set_userdata('admin', false);
 		$admin['login'] = $this->session->userdata('admin');
-		
+
 		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/Admin_header.php', NULL, TRUE);
@@ -28,7 +27,17 @@ class Admin extends CI_Controller {
 	}
 
 	public function login(){
-		$this->session->set_userdata('admin', true);
+		$user = $this->Admin_Home_Model->get_admin($_POST['username'], $_POST['password']);
+
+		$_POST = NULL;
+		$_GET  = NULL;
+
+		if(sizeof($user) > 0){
+			$this->session->set_userdata('admin', true);
+		}
+		else {
+			$this->session->set_userdata('admin', false);
+		}
 		redirect('Admin');
 	}
 
