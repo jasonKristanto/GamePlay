@@ -78,7 +78,7 @@ class Buy extends CI_Controller {
 		$_GET= NULL;
 
 		$this->Buy_Model->checkout($trans, $trans_detail);
-		$this->Buy_Model->clearCart();
+		$this->Buy_Model->clearCart($ID_Cust);
 
 		redirect(base_url());
 	}

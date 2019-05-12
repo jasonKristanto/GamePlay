@@ -45,8 +45,9 @@
 			return $query->result_array();
 		}
 
-		public function clearCart(){
-			$this->db->empty_table('cart');
+		public function clearCart($value){
+			$this->db->where('ID_cust', $value);
+			$this->db->delete('cart');
 		}
 	}
 ?>
