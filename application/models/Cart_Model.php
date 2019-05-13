@@ -9,6 +9,15 @@
 			return $query->result_array();
 		}
 
+		public function get_ID_cust($value){
+			$this->db->select('id');
+      $this->db->from('user');
+      $this->db->where('username', $value);
+      $query = $this->db->get();
+
+			return $query->result_array();
+		}
+
     public function get_product($id){
       $this->db->select('*');
       $this->db->from('product');

@@ -34,10 +34,13 @@ class Cart extends CI_Controller {
 
 		$qty = $_GET['qty'];
 
+		$ID_Cust = $this->Cart_Model->get_ID_cust($this->session->username);
+
 		if(sizeof($product_cart) > 0){
 			$qty += $product_cart[0]['qty'];
 
 			$values = array(
+				'ID_cust' => $ID_Cust[0]['id'],
 				'ID_product' => $product_cart[0]['ID_product'],
 				'productName' => $product[0]['productName'],
 				'qty' => $qty
@@ -47,6 +50,7 @@ class Cart extends CI_Controller {
 		}
 		else {
 			$values = array(
+				'ID_cust' => $ID_Cust[0]['id'],
 	      'ID_product' => $product[0]['ID'],
 	      'productName' => $product[0]['productName'],
 	      'qty' => $qty
@@ -55,13 +59,17 @@ class Cart extends CI_Controller {
 			$this->Cart_Model->insert_cart($values);
 		}
 
-		$_POST = NULL;
-		$_GET= NULL;
-
-		if($_GET['cart'] == 1)
+		if($_GET['cart'] == 1){
+			$_POST = NULL;
+			$_GET= NULL;
 			redirect(base_url() . "Cart");
-		else if($_GET['cart'] == 0)
-    	redirect(base_url());
+		}
+
+		else if($_GET['cart'] == 0){
+			$_POST = NULL;
+			$_GET= NULL;
+			redirect(base_url());
+		}
   }
 
 	public function remove(){
