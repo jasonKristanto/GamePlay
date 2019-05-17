@@ -15,8 +15,6 @@
                     <span class='red'><?php if(isset($error)) echo $error;?></span>
                 </div>
                 <div class="modal-footer">
-                
-
                     <button type="submit" class="btn btn-primary btnx">Login</button>
                 </div>
             </form>
