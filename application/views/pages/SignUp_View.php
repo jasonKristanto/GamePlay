@@ -32,8 +32,10 @@
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" name="signup_alamat" placeholder="Alamat Lengkap">
+						<textarea class="form-control" name="signup_alamat" placeholder="Alamat Lengkap" rows="5"></textarea>
 					</div>
+
+					<h5 id='loginFailed' class="text-center" style="color:red;"></h5>
 
 					<div class="form-group">
 						<div align="right">
@@ -50,8 +52,8 @@
 	</body>
 	<style>
 		.wrapper{
-			min-height: 85%; 
-			min-height: 85vh; 
+			min-height: 85%;
+			min-height: 85vh;
 			display: flex;
 			align-items: center;
 		}
@@ -61,11 +63,11 @@
 			background: #EEEEEE;
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 			border-radius: 5px;
-		} 
+		}
 		.card > form {
 			margin:10px;
-		} 
-		.card > form input[type=text], 
+		}
+		.card > form input[type=text],
 		.card > form input[type=password],
 		.card > form input[type=email] {
 			height: 40px;
@@ -88,5 +90,17 @@
 			text-align: center;
 			-webkit-border-radius: 0 0 10px 10px;
 		}
+
+		textarea {
+		   resize: none;
+		}
 		</style>
+		<script>
+		<?php if($this->session->signUp == "gagal") { ?>
+			$('#loginFailed').text('Proses pendaftaran gagal. Silahkan coba lagi.');
+		<?php $this->session->unset_userdata('signUp'); } ?>
+		<?php if($this->session->signUp == "sama") { ?>
+			$('#loginFailed').text('Sudah ada akun yang digunakan. Silahkan coba lagi.');
+		<?php $this->session->unset_userdata('signUp'); } ?>
+		</script>
 </html>

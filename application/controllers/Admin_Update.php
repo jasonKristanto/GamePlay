@@ -32,19 +32,20 @@ class Admin_Update extends CI_Controller {
 			redirect(base_url() . 'Admin');
 		}
 		else if ($this->input->post('Update')){
-			// echo "<pre>";
-			// print_r($_POST);
-			// echo "</pre>";
-
-	  	echo "<pre>";
-			print_r($_FILES);
-			echo "</pre>";
-
+			$cek = 0;
 			$product = $this->Admin_Update_Model->get_product($_GET['id']);
+			$product_validate = $this->Admin_Update_Model->get_products($this->input->post('update_nama'));
 
       $sizeCheckBox = count($this->input->post('update_genre'));
 
 			$arr = "";
+
+			if($product_validate[0]['productName'] != $product[0]['productName']){
+				echo $product_validate[$i] . "<br>";
+				$this->session->set_userdata('update', 'sama');
+				$_POST = NULL;
+				redirect(base_url() . "Admin_Update?product_id=" . $_GET['id']);
+			}
 
 			for ($i=0; $i < $sizeCheckBox; $i++) {
 				if($arr > 0){
@@ -76,15 +77,15 @@ class Admin_Update extends CI_Controller {
 			}
 			else {
 				$config['upload_path']          = './assets/pict_product/';
-		        $config['allowed_types']        = 'jpg|png|';
+        $config['allowed_types']        = 'jpg|png|';
 
-		        $this->load->library("upload", $config);
-		        $this->upload->initialize($config);
+        $this->load->library("upload", $config);
+        $this->upload->initialize($config);
 
-		        $proses = $this->upload->do_upload('update_file');
+        $proses = $this->upload->do_upload('update_file');
 
-		        if($proses){
-		        	$values = array(
+        if($proses){
+        	$values = array(
 						'ID' => $this->input->post('update_id'),
 						'productName' => $this->input->post('update_nama'),
 						'price' => $this->input->post('update_price'),
@@ -97,12 +98,15 @@ class Admin_Update extends CI_Controller {
 					echo "<pre>";
 					print_r($this->upload->data());
 					echo "</pre>";
-		        }
-		        else {
-		        	echo "<pre>";
+        }
+        else {
+					echo "<pre>";
 					print_r($this->upload->display_errors());
 					echo "</pre>";
-		        }
+					$this->session->set_userdata('update', 'gagal');
+					$_POST = NULL;
+					redirect(base_url() . "Admin_Update?product_id =" . $_GET['id']);
+        }
 			}
 
 			$this->Admin_Update_Model->update($values);

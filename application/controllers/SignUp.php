@@ -29,16 +29,34 @@ class SignUp extends CI_Controller {
 	        'alamat' => $this->input->post('signup_alamat')
 	      );
 
+				$user = $this->SignUp_Model->get_user($values);
+
+				if(sizeof($user) >= 1){
+					$this->session->set_userdata('signUp', 'sama');
+					$_POST = NULL;
+					$_GET= NULL;
+					redirect(base_url() . "SignUp");
+				}
+
 	      $this->SignUp_Model->insert_user($values);
+
+				$_POST = NULL;
+				$_GET= NULL;
+				$this->session->unset_userdata('signUp');
+	      redirect(base_url() . "Login");
 			}
-			$_POST = NULL;
-			$_GET= NULL;
-      redirect(base_url());
+			else {
+				$this->session->set_userdata('signUp', 'gagal');
+				$_POST = NULL;
+				$_GET= NULL;
+	      redirect(base_url() . "SignUp");
+			}
     }
     else {
+			$this->session->set_userdata('signUp', 'gagal');
 			$_POST = NULL;
 			$_GET= NULL;
-      redirect(base_url());
+      redirect(base_url() . "SignUp");
     }
   }
 }

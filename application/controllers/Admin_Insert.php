@@ -10,7 +10,7 @@ class Admin_Insert extends CI_Controller {
 
 	public function index()
 	{
-		if(!$this->session->userdata('admin')) redirect(base_url() . 'Admin');
+		if(!$this->session->userdata('admin')) redirect(base_url() . 'Admin'); 
 
 		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
@@ -30,6 +30,16 @@ class Admin_Insert extends CI_Controller {
 		}
 		else if ($this->input->post('Submit')){
 			//redirect(base_url() . 'Admin');
+
+			$products = $this->Admin_Insert_Model->get_products($this->input->post('insert_nama'));
+
+			if(sizeof($products) >= 1){
+				$this->session->set_userdata('insert', 'sama');
+				$_POST = NULL;
+				$_GET= NULL;
+				redirect(base_url() . "Admin_Insert");
+			}
+
 			$sizeCheckBox = count($this->input->post('insert_genre'));
 
 			$config['upload_path']          = './assets/pict_product/';
@@ -72,6 +82,7 @@ class Admin_Insert extends CI_Controller {
 				print_r($values);
 
 				$this->Admin_Insert_Model->insert($values);
+				$this->session->unset_userdata('insert');
 
 				$_POST = NULL;
 				$_GET= NULL;
@@ -84,7 +95,10 @@ class Admin_Insert extends CI_Controller {
 				$_GET= NULL;
 				$_FILES = NULL;
 
-				redirect(base_url() . 'Admin');
+				$this->session->set_userdata('insert', 'gagal');
+				$_POST = NULL;
+				$_GET= NULL;
+				redirect(base_url() . "Admin_Insert");
 			}
 		}
 	}

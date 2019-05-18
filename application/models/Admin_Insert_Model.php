@@ -9,5 +9,14 @@
 
 			return $query->result_array();
 		}
+
+		public function get_products($values){
+			$this->db->select('*');
+			$this->db->from('product');
+			$this->db->where('productName', $values);
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
 	}
 ?>

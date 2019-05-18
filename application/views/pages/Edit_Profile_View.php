@@ -20,10 +20,10 @@
 				<div class="container-fluid">
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title">Update Product</h3>
+							<h3 class="box-title">Insert New Product</h3>
 						</div>
 						<div class="box-body">
-							<h5 id='updateFailed' class="text-center" style="color:red;"></h5>
+
 							<?php
 								$genreID = explode(";", $product[0]['genreID']);
 							?>
@@ -137,36 +137,29 @@
 		</div>
 	</body>
     <script>
-			$(document).ready(function() {
-				$('#summernote').summernote();
-			});
+		$(document).ready(function() {
+			$('#summernote').summernote();
+		});
 
-			function imgChange(input) {
-				if (input.files && input.files[0]) {
-					var reader = new FileReader();
+		function imgChange(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
 
-					reader.onload = function(e) {
-						$('#imgPreview').attr('src', e.target.result);
-					}
-
-					reader.readAsDataURL(input.files[0]);
+				reader.onload = function(e) {
+					$('#imgPreview').attr('src', e.target.result);
 				}
+
+				reader.readAsDataURL(input.files[0]);
 			}
+		}
 
-      $(".menu-toggle").click(function(e) {
-          e.preventDefault();
-          $("#wrapper").toggleClass("toggled");
-      });
+        $(".menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
 
-			$("#imgInput").change(function() {
-				imgChange(this);
-			});
-
-			<?php if($this->session->update == "gagal") { ?>
-					$('#updateFailed').text('Proses update gagal. Silahkan coba lagi.');
-			<?php $this->session->unset_userdata('update'); } ?>
-			<?php if($this->session->update == "sama") { ?>
-					$('#updateFailed').text('Sudah ada produk. Silahkan coba lagi.');
-			<?php $this->session->unset_userdata('update'); } ?>
+		$("#imgInput").change(function() {
+			imgChange(this);
+		});
     </script>
 </html>
