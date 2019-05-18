@@ -18,6 +18,9 @@ class Home extends CI_Controller {
 		$data['product'] = $this->Home_Model->get_products();
 		$data['genre'] = $this->Home_Model->get_genre();
 
+		$data2['product'] = $data['product'];
+		$data['carousel'] = $this->load->view('pages/Home_Carousel.php', $data2, TRUE);
+
 		$this->load->view('pages/Home_View.php', $data);
 	}
 
