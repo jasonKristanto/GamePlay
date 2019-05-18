@@ -16,23 +16,27 @@
 				</div>
 				<form class="form-signup" method="POST" action="SignUp/signup">
 					<div class="form-group">
-						<input type="text" class="form-control" name="signup_username" placeholder="Username">
+						<input type="text" class="form-control" name="signup_username" placeholder="Username" required>
 					</div>
 
 					<div class="form-group">
-						<input type="password" class="form-control" name="signup_password" placeholder="Password">
+						<input type="password" class="form-control" name="signup_password" placeholder="Password" required>
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" name="signup_nama" placeholder="Nama Lengkap">
+						<input type="text" class="form-control" name="signup_nama" placeholder="Nama Lengkap" required>
 					</div>
 
 					<div class="form-group">
-						<input type="email" class="form-control" name="signup_email" placeholder="Email">
+						<input type="email" class="form-control" name="signup_email" placeholder="Email" required>
 					</div>
 
 					<div class="form-group">
-						<textarea class="form-control" name="signup_alamat" placeholder="Alamat Lengkap" rows="5"></textarea>
+						<input type="text" class="form-control" name="signup_HP" placeholder="Nomor Handphone" required>
+					</div>
+
+					<div class="form-group">
+						<textarea class="form-control" name="signup_alamat" placeholder="Alamat Lengkap" rows="5" required></textarea>
 					</div>
 
 					<h5 id='loginFailed' class="text-center" style="color:red;"></h5>

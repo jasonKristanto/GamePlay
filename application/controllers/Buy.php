@@ -30,6 +30,11 @@ class Buy extends CI_Controller {
 	}
 
 	public function checkout(){
+		date_default_timezone_set("Asia/Jakarta");
+		$timestamp = time();
+
+		echo date("F d, h:i A", $timestamp);
+
 		if(!isset($this->session->nama)){
 			redirect(base_url() . "Login");
 		}
@@ -57,6 +62,7 @@ class Buy extends CI_Controller {
 
 		$trans = array(
 			'ID_Cust' => $ID_Cust[0]['id'],
+			'tanggalTransaksi' => $timestamp,
 			'total' => $_POST['checkout_total'],
 			'jenis_kirim' => $jenis_kirim,
 			'biaya_kirim' => $_POST['checkout_kirim'],

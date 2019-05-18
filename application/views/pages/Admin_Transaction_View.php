@@ -4,6 +4,7 @@
 		<?php
 			echo $js;
 			echo $css;
+			date_default_timezone_set("Asia/Jakarta");
 		?>
 
 		<title>GamePlay Admin</title>
@@ -28,7 +29,7 @@
 								<thead>
 									<th class="text-center">ID Transaction</th>
 									<th class="text-center">ID Customer</th>
-									<th class="text-center">Total Belanja</th>
+									<th class="text-center">Tanggal Transaksi</th>
 									<th class="text-center">Jenis Pengiriman</th>
 									<th class="text-center">Biaya Pengiriman</th>
 									<th class="text-center">Jenis Pembayaran</th>
@@ -52,7 +53,7 @@
 											echo "<tr>";
 												echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_id . "</td>";
 												echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_cust . "</td>";
-												echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_total,2) . "</td>";
+												echo "<td class='text-center' style='vertical-align:middle;'>" . date("F d, h:i A", $row['tanggalTransaksi']) . "</td>";
 												echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_kirim . "</td>";
 												echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_biaya_kirim,2) . "</td>";
 												echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_pembayaran . "</td>";
@@ -65,7 +66,7 @@
 								<tfoot>
 									<th class="text-center">ID Transaction</th>
 									<th class="text-center">ID Customer</th>
-									<th class="text-center">Total Belanja</th>
+									<th class="text-center">Tanggal Transaksi</th>
 									<th class="text-center">Jenis Pengiriman</th>
 									<th class="text-center">Biaya Pengiriman</th>
 									<th class="text-center">Jenis Pembayaran</th>

@@ -6,141 +6,123 @@
 			echo $css;
 		?>
 
-		<title>Update Product</title>
+		<title>Edit Profile</title>
 	</head>
-    <body class="bgGrey">
-		<div id="wrapper">
+	<body class="bgGrey2">
+		<?php echo $header; ?>
+		<div class="container-fluid">
+			<div class="box">
+				<div class="box-header text-center">
+					<h3 class="box-title">Edit Profile</h3>
+				</div>
+				<div class="box-body">
+					<h5 id='updateFailed' class="text-center" style="color:red;"></h5>
 
-			<?php
-				echo $sidebar;
-				echo $header;
-			?>
+					<form class="form-signup" method="POST" action="<?php echo base_url() . "User_Profile/edit_action"; ?>" enctype="multipart/form-data">
+						<div class="form-group" style="margin-top:20px;">
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"></label>
+								<label class="col-sm-2 col-form-label" for="update_id">Username</label>
+								<div class="col-sm-4" style="width:50%;">
+									<input type="hidden" class="form-control" name="edit_id" value="<?php echo $user[0]['id']; ?>" >
+									<input type="text" class="form-control" name="edit_username" value="<?php echo $user[0]['username']; ?>" >
+								</div>
+							</div>
 
-			<div id="page-content-wrapper">
-				<div class="container-fluid">
-					<div class="box">
-						<div class="box-header">
-							<h3 class="box-title">Insert New Product</h3>
-						</div>
-						<div class="box-body">
-
-							<?php
-								$genreID = explode(";", $product[0]['genreID']);
-							?>
-
-							<form class="form-group" method="POST" action="Admin_Update/update_action?id=<?php echo $product[0]['ID']; ?>" enctype="multipart/form-data">
-								<div class="form-group">
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label" for="update_id">Product ID</label>
-										<div class="col-sm-4" style="width:50%;">
-											<input type="text" class="form-control" name="update_id" value="<?php echo $product[0]['ID']; ?>" readonly>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label" for="update_nama">Product Name</label>
-										<div class="col-sm-4" style="width:50%;">
-											<input type="text" class="form-control" name="update_nama" value="<?php echo $product[0]['productName']; ?>">
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label" for="update_desc">Description</label>
-										<div class="col-sm-4" style="width:50%;">
-											<textarea id="summernote" class="form-control" name="update_desc"><?php echo $product[0]['description']; ?></textarea>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label" for="update_dev">Developer</label>
-										<div class="col-sm-4" style="width:50%;">
-											<input type="text" class="form-control" name="update_dev" value="<?php echo $product[0]['developer']; ?>">
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label" for="update_genre">Genre</label>
-										<div class="col-sm-4" style="width:50%;">
-											<button href="#genreList" data-toggle="collapse" class="genre-toggle btn">Genre</button>
-											<div class="collapse" id="genreList">
-												<?php
-													foreach ($genre as $row) {
-														$cek = 0;
-														for($i=0; $i < sizeof($genreID); $i++){
-															if($genreID[$i] == $row['ID']){
-																echo "<input type=\"checkbox\" name=\"update_genre[]\" value=\"" . $row['genre'] . "\" checked>" . ucwords($row['genre']) . "<br>";
-																$cek = 1;
-																break;
-															}
-														}
-														if($cek == 0){
-															echo "<input type=\"checkbox\" name=\"update_genre[]\" value=\"" . $row['genre'] . "\">" . ucwords($row['genre']) . "<br>";
-														}
-													}
-												?>
-											</div>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label" for="update_stock">Stock</label>
-										<div class="col-sm-4" style="width:50%;">
-											<input type="number" class="form-control" name="update_stock" value="<?php echo $product[0]['stock']; ?>">
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label" for="update_price">Price</label>
-										<div class="col-sm-4" style="width:50%;">
-											<input type="number" class="form-control" name="update_price" value="<?php echo $product[0]['price']; ?>">
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label for="poster" class="col-sm-2 col-form-label">Image Preview</label>
-										<div class="col-sm-4" style="width:50%;">
-											<img id="imgPreview" style="max-width: 100px;" src="<?php echo base_url('assets/pict_product/') . $product[0]['picture']; ?>" />
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label for="update_file" class="col-sm-2 col-form-label">Upload Image</label>
-										<div class="col-sm-4" style="width:50%;">
-											<input id='imgInput' type="file" class="form-control-file" name="update_file">
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<label class="col-sm-2 col-form-label"></label>
-										<label class="col-sm-2 col-form-label"></label>
-										<div class="col-sm-4" align="right" style="width: 50%;">
-											<input class="btn btn-primary" type="submit" name="Update" value="Update">
-											<input class="btn btn-danger" type="submit" name="Cancel" value="Cancel">
-										</div>
+							<div class="form-group" style="margin-top:20px;">
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label" for="update_id">Password</label>
+									<div class="col-sm-4" style="width:50%;">
+										<input type="password" class="form-control" name="edit_password" value="<?php echo $user[0]['password']; ?>">
 									</div>
 								</div>
-							</form>
+							</div>
+
+							<div class="form-group" style="margin-top:20px;">
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label" for="update_id">Nama</label>
+									<div class="col-sm-4" style="width:50%;">
+										<input type="text" class="form-control" name="edit_nama" value="<?php echo $user[0]['nama']; ?>">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-top:20px;">
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label" for="update_id">Email</label>
+									<div class="col-sm-4" style="width:50%;">
+										<input type="email" class="form-control" name="edit_email" value="<?php echo $user[0]['email']; ?>">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-top:20px;">
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label" for="update_id">Nomor Handphone</label>
+									<div class="col-sm-4" style="width:50%;">
+										<input type="text" class="form-control" name="edit_HP" value="<?php echo $user[0]['nomor_handphone']; ?>">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group" style="margin-top:20px;">
+								<div class="form-group row">
+									<label class="col-sm-2 col-form-label"></label>
+									<label class="col-sm-2 col-form-label" for="update_id">Alamat</label>
+									<div class="col-sm-4" style="width:50%;">
+										<textarea class="form-control" name="edit_alamat" rows="5"><?php echo $user[0]['alamat']; ?></textarea>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"></label>
+								<label for="poster" class="col-sm-2 col-form-label">Image Preview</label>
+								<div class="col-sm-4" style="width:50%;">
+									<img id="imgPreview" style="max-width: 100px;" src="<?php echo base_url('assets/pict_user/') . $user[0]['picture']; ?>" />
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"></label>
+								<label for="update_file" class="col-sm-2 col-form-label">Upload Image</label>
+								<div class="col-sm-4" style="width:50%;">
+									<input id='imgEdit' type="file" class="form-control-file" name="edit_file">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label"></label>
+								<label class="col-sm-2 col-form-label"></label>
+								<div class="col-sm-4" align="right" style="width: 50%;">
+									<input class="btn btn-primary" type="submit" name="Submit" value="Edit">
+									<input class="btn btn-danger" type="submit" name="Cancel" value="Cancel">
+								</div>
+							</div>
 
 						</div>
-					</div>
+					</form>
+
 				</div>
 			</div>
 		</div>
-	</body>
-    <script>
-		$(document).ready(function() {
-			$('#summernote').summernote();
-		});
+		<div class="container-fluid wrapper box">
 
+			<div class="box-body">
+
+			</div>
+		</div>
+	</body>
+	<style>
+		textarea {
+			 resize: none;
+		}
+	</style>
+	<script>
 		function imgChange(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
@@ -153,13 +135,16 @@
 			}
 		}
 
-        $(".menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-
-		$("#imgInput").change(function() {
+		$("#imgEdit").change(function() {
 			imgChange(this);
 		});
-    </script>
+
+		<?php if($this->session->edit == "gagal") { ?>
+			$('#editFailed').text('Proses perubahan gagal. Silahkan coba lagi.');
+		<?php $this->session->unset_userdata('edit'); } ?>
+
+		<?php if($this->session->edit == "sama") { ?>
+			$('#editFailed').text('Sudah ada akun yang digunakan. Silahkan coba lagi.');
+		<?php $this->session->unset_userdata('edit'); } ?>
+	</script>
 </html>

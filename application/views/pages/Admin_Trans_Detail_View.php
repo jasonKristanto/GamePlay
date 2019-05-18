@@ -14,6 +14,15 @@
 			<?php
 				echo $sidebar;
 				echo $header;
+
+				$total = 0;
+				foreach ($trans_detail as $row) {
+					$trans_harga = $row['harga'];
+					$trans_qty = $row['qty'];
+					$trans_total = $trans_harga * $trans_qty;
+
+					$total += $trans_total;
+				}
 			?>
 
 			<div id="page-content-wrapper">
@@ -23,7 +32,34 @@
 							<h3 class="box-title">Transaction Table</h3>
 						</div>
 						<div class="box-body">
-
+							<div class="col-md-12">
+								<div class="row" style="margin-bottom:5px;">
+									<label class="col-md-12 col-form-label" style="vertical-align:middle;">Tanggal Transaksi</label>
+									<div class="">
+										<p class="col-md-12 col-form-label" style="vertical-align:middle;"><?php echo date("F d, h:i A", $trans_detail[0]['tanggalTransaksi']); ?></p>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom:5px;">
+									<label class="col-md-3 col-form-label" style="vertical-align:middle;">Jenis Pengiriman</label>
+									<label class="col-md-9 col-form-label" style="vertical-align:middle;">Biaya Pengiriman</label>
+									<div class="">
+										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $trans_detail[0]['jenis_kirim']; ?></p>
+									</div>
+									<div class="">
+										<p class="col-md-9 col-form-label" style="vertical-align:middle;">Rp. <?php echo number_format($trans_detail[0]['biaya_kirim'], 2); ?></p>
+									</div>
+								</div>
+								<div class="row" style="margin-bottom:5px;">
+									<label class="col-md-3 col-form-label" style="vertical-align:middle;">Jenis Pembayaran</label>
+									<label class="col-md-9 col-form-label" style="vertical-align:middle;">Total Pembayaran</label>
+									<div class="">
+										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $trans_detail[0]['jenis_pembayaran']; ?></p>
+									</div>
+									<div class="">
+										<p class="col-md-9 col-form-label" style="vertical-align:middle;">Rp. <?php echo number_format($total+$trans_detail[0]['biaya_kirim'], 2); ?></p>
+									</div>
+								</div>
+							</div>
 							<table id="myTable" class="table table-striped table-bordered" style="width:100%">
 								<thead>
 									<th class="text-center">ID Transaction</th>

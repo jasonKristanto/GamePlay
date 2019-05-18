@@ -2,74 +2,106 @@
 <html>
 	<head>
 		<?php
+			date_default_timezone_set("Asia/Jakarta");
 			echo $js;
 			echo $css;
 		?>
 
-		<title><?php echo $product[0]['productName']; ?></title>
+		<title><?php echo $user[0]['nama']; ?></title>
 	</head>
 	<body class="bgGrey2">
 		<?php echo $header; ?>
-		<div class="container wrapper">
-			<div class="card">
+		<?php $profile_pict = base_url('assets/pict_user/') . $user[0]['picture'];?>
 
-				<div class="row">
-					<div class="col-md-6">
-					<?php $product_pict = base_url('assets/pict_product/') . $product[0]['picture'];?>
-						<div align="center">
-							<img src="<?php echo $product_pict; ?>" class="img-responsive center-block" style="min-height: 100%;">
+		<div class="container-fluid wrapper">
+			<div class="card row">
+				<div class="col-md-4">
+					<div class="row text-center">
+						<img src="<?php echo $profile_pict; ?>" style="width:22%;">
+					</div>
+					<br>
+					<div class="row text-center" style="margin-bottom:5px;">
+						<label class="col-form-label" style="vertical-align:middle;">Nama</label>
+						<div class="">
+							<p class="col-form-label" style="vertical-align:middle;"><?php echo $user[0]['nama']?></p>
 						</div>
 					</div>
-
-					<div class="col-md-6">
-						<div class="item-detail">
-							<h2 class="item-title"><?php echo $product[0]['productName']; ?></h2>
-							<h4 class="item-price">Rp. <?php echo number_format($product[0]['price'],2); ?></h4>
-							<p class="item-desc"><?php echo $product[0]['description']; ?></p>
+					<div class="row text-center" style="margin-bottom:5px;">
+						<label class="col-form-label" style="vertical-align:middle;">Username</label>
+						<div class="">
+							<p class="col-form-label" style="vertical-align:middle;"><?php echo $user[0]['username']?></p>
 						</div>
-						<form class="form-group" method="POST" action="Detail/detail" >
-							<div class="form-group">
-									<input type="hidden" class="form-control" name="detail_ID" value=" <?php echo $product[0]['ID']; ?>">
-									<div class="form-group row">
-										<label class="col-sm-2"></label>
-										<label class="col-sm-2 col-form-label" for="detail_qty">Stock</label>
-										<div class="col-sm-4" style="width:50%;">
-											<?php if($product[0]['stock'] > 0) { ?>
-												<input type="number" class="form-control" name="detail_qty" value="1" placeholder="Quantity" min="1" max="<?php echo $product[0]['stock']; ?>" required>
-											<?php } ?>
-											<?php if($product[0]['stock'] <= 0) { ?>
-												<input type="number" class="form-control" name="detail_qty" value="1" placeholder="Quantity" min="1" max="<?php echo $product[0]['stock'];?>" disabled>
-											<?php } ?>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<div class="col" align="center" >
-											<?php if($product[0]['stock'] > 0) { ?>
-												<input class="btn btn-success" type="submit" name="Buy" value="Buy">
-												<input class="btn btn-primary" type="submit" name="Cart" value="Add To Cart">
-												<input class="btn btn-danger" type="submit" name="Cancel" value="Back to Home">
-											<?php }	?>
-											<?php if($product[0]['stock'] <= 0) { ?>
-												<input class="btn btn-success" type="submit" name="Buy" value="Buy" disabled>
-												<input class="btn btn-primary" type="submit" name="Cart" value="Add To Cart" disabled>
-												<input class="btn btn-danger" type="submit" name="Cancel" value="Back to Home">
-											<?php }	?>
-										</div>
-									</div>
-							</div>
-						</form>
 					</div>
-
-
-					<!-- <div class="col-md-7">
-						<h2 class="text-center"><?php echo $product[0]['productName']; ?></h2>
-						<h4 class="item-price">Rp. <?php echo number_format($product[0]['price'],2); ?></h4>
-
-					</div> -->
+					<div class="row text-center" style="margin-bottom:5px;">
+						<label class="col-form-label" style="vertical-align:middle;">Email</label>
+						<div class="">
+							<p class="col-form-label" style="vertical-align:middle;"><?php echo $user[0]['email']?></p>
+						</div>
+					</div>
+					<div class="row text-center" style="margin-bottom:5px;">
+						<label class="col-form-label" style="vertical-align:middle;">No. Handphone</label>
+						<div class="">
+							<p class="col-form-label" style="vertical-align:middle;"><?php echo $user[0]['nomor_handphone']?></p>
+						</div>
+					</div>
+					<div class="row text-center" style="margin-bottom:15px;">
+						<label class="col-form-label" style="vertical-align:middle;">Alamat</label>
+						<div class="">
+							<p class="col-form-label" style="vertical-align:middle;"><?php echo $user[0]['alamat']?></p>
+						</div>
+					</div>
+					<div class="row text-center">
+						<a href="<?php echo base_url() . "User_Profile/edit_profile" ?>"><button style="width:75%;" class="btn btn-success">Edit Profile</button></a>
+					</div>
 				</div>
 
+	      <div class="col-md-8">
+					<table id="myTable" align="center" class="table table-striped table-bordered" style="width:50%">
+						<thead>
+							<th class="text-center">Nomor Transaksi</th>
+							<th class="text-center">Tanggal Transaksi</th>
+							<th class="text-center">Jenis Pengiriman</th>
+							<th class="text-center">Jenis Pembayaran</th>
+							<th class="text-center">Total Pembayaran</th>
+							<th class="text-center">Detil Transaksi</th>
+						</thead>
+						<tbody>
+							<?php
+								$total = 0;
+								$ctr = 1;
+								$ctr_sama = 0;
+								$temp = -999;
+								$product = array();
+								foreach ($transaction as $row) {
+									if($temp == $row['ID_trans']){
+										continue;
+									}
 
+									$trans_id = $row['ID_trans'];
+									$temp = $trans_id;
+									$trans_cust = $row['ID_cust'];
+									$trans_total = $row['total'];
+									$trans_biaya_kirim = $row['biaya_kirim'];
+									$trans_jenis_kirim = $row['jenis_kirim'];
+									$trans_jenis_pembayaran = $row['jenis_pembayaran'];
+									$trans_grand_total = $row['grand_total'];
+
+									$total += $trans_grand_total;
+
+									echo "<tr>";
+										echo "<td class='text-center' style='vertical-align:middle;'>" . $ctr . "</td>";
+										echo "<td class='text-center' style='vertical-align:middle;'>" . date("F d, h:i A", $row['tanggalTransaksi']) . "</td>";
+										echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_kirim . "</td>";
+										echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_pembayaran . "</td>";
+										echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_grand_total,2) . "</td>";
+										echo "<td class='text-center' style='vertical-align:middle;'><a href=\"" . base_url() . "User_Profile/trans_detail?id=" . $trans_id . "\"><button style=\"margin:2px;\" class=\"btn btn-primary\">Detail</button></a></td>";
+									echo "</tr>";
+									$ctr += 1;
+								}
+							?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 
@@ -87,46 +119,12 @@
 			}
 			.card {
 				float: auto;
-				margin: 0 auto 0;
-				padding: 2%;
-				width: 100%;
+				margin: auto;
+				margin-top: 1%;
+				padding: 1%;
 				background: #EEEEEE;
 				box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 				border-radius: 5px;
-			}
-
-			.card .item-detail {
-				margin-bottom: 45px;
-			}
-
-			.card .item-title {
-				font-size: 3.5em;
-				font-weight: 300;
-				color: black;
-				margin-bottom: 10px;
-			}
-
-			.card .item-price {
-				font-size: 1.5em;
-				color: #5FA4CC;
-				margin-bottom: 15px;
-				display: block;
-			}
-
-			.card .item-desc {
-				font-size: 1.em;
-				color: #black;
-				margin-bottom: 10px;
-				display: block;
-			}
-
-			.card img{
-				width: 100%;
-				margin: auto;
-				min-height:initial;
-				border: 10px solid #F0F0F0;
-				border-radius: 20px;
-				max-width: 100%;
 			}
 		</style>
 	</body>
