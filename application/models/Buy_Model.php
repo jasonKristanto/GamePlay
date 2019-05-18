@@ -17,6 +17,14 @@
 			}
 		}
 
+		public function update_product($values){
+			for ($i=0; $i < sizeof($values); $i++) {
+				$this->db->set('stock', $values[$i]['stock'], FALSE);
+				$this->db->where('ID', $values[$i]['ID']);
+				$this->db->update('product');
+			}
+		}
+
 		public function get_ID_cust($value){
 			$this->db->select('id');
       $this->db->from('user');

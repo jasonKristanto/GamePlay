@@ -43,6 +43,7 @@ class Buy extends CI_Controller {
 		$ID_Cust = $this->Buy_Model->get_ID_cust($this->session->username);
 		$last_ID_trans = $this->Buy_Model->get_ID_trans();
 		$trans_detail = array();
+		$update_stock = array();
 
 		$grand_total = $_POST['checkout_total'] + $_POST['checkout_kirim'];
 		$last_ID_trans = (int)$last_ID_trans[0]['ID_trans'] + 1;
@@ -71,12 +72,21 @@ class Buy extends CI_Controller {
 				'harga' => $checkout_product[$i]['price']
 			);
 
+			$temp2 = array(
+				'ID' => $checkout_product[$i]['ID_product'],
+				'stock' => $checkout_product[$i]['stock'] - $checkout_product[$i]['qty']
+			);
+
 			array_push($trans_detail, $temp);
+			array_push($update_stock, $temp2);
+
+			echo $checkout_product[$i]['stock'] - $checkout_product[$i]['qty'];
 		}
 
 		$_POST = NULL;
 		$_GET= NULL;
 
+		$this->Buy_Model->update_product($update_stock);
 		$this->Buy_Model->checkout($trans, $trans_detail);
 		$this->Buy_Model->clearCart($ID_Cust[0]['id']);
 

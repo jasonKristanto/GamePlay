@@ -34,30 +34,42 @@
 										<label class="col-sm-2"></label>
 										<label class="col-sm-2 col-form-label" for="detail_qty">Stock</label>
 										<div class="col-sm-4" style="width:50%;">
-											<input type="number" class="form-control" name="detail_qty" value="1" placeholder="Quantity" min="1">
+											<?php if($product[0]['stock'] > 0) { ?>
+												<input type="number" class="form-control" name="detail_qty" value="1" placeholder="Quantity" min="1" max="<?php echo $product[0]['stock']; ?>" required>
+											<?php } ?>
+											<?php if($product[0]['stock'] <= 0) { ?>
+												<input type="number" class="form-control" name="detail_qty" value="1" placeholder="Quantity" min="1" max="<?php echo $product[0]['stock'];?>" disabled>
+											<?php } ?>
 										</div>
 									</div>
 
 									<div class="form-group row">
 										<div class="col" align="center" >
-											<input class="btn btn-success" type="submit" name="Buy" value="Buy">
-											<input class="btn btn-primary" type="submit" name="Cart" value="Add To Cart">
-											<input class="btn btn-danger" type="submit" name="Cancel" value="Back to Home">
+											<?php if($product[0]['stock'] > 0) { ?>
+												<input class="btn btn-success" type="submit" name="Buy" value="Buy">
+												<input class="btn btn-primary" type="submit" name="Cart" value="Add To Cart">
+												<input class="btn btn-danger" type="submit" name="Cancel" value="Back to Home">
+											<?php }	?>
+											<?php if($product[0]['stock'] <= 0) { ?>
+												<input class="btn btn-success" type="submit" name="Buy" value="Buy" disabled>
+												<input class="btn btn-primary" type="submit" name="Cart" value="Add To Cart" disabled>
+												<input class="btn btn-danger" type="submit" name="Cancel" value="Back to Home">
+											<?php }	?>
 										</div>
 									</div>
 							</div>
 						</form>
 					</div>
 
-				
+
 					<!-- <div class="col-md-7">
 						<h2 class="text-center"><?php echo $product[0]['productName']; ?></h2>
 						<h4 class="item-price">Rp. <?php echo number_format($product[0]['price'],2); ?></h4>
-						
+
 					</div> -->
 				</div>
 
-				
+
 			</div>
 		</div>
 
@@ -68,8 +80,8 @@
 		</script>
 		<style>
 			.wrapper{
-				min-height: 90%; 
-				min-height: 90vh; 
+				min-height: 90%;
+				min-height: 90vh;
 				display: flex;
 				align-items: center;
 			}
@@ -81,7 +93,7 @@
 				background: #EEEEEE;
 				box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 				border-radius: 5px;
-			} 
+			}
 
 			.card .item-detail {
 				margin-bottom: 45px;

@@ -23,7 +23,7 @@
 				echo "style=\"background-image: url('".$product_pict."')\">";
 
 		?>
-		
+
 		<!-- <div class="item"> -->
 			<div class="container-fluid">
 				<div class="row">
@@ -31,7 +31,12 @@
 						<h2 class="item-title"><?php echo $product_name; ?></h2>
 						<small class="item-price">Rp. <?php echo number_format($product_price,2); ?></small>
 						<p><?php echo $product_desc; ?></p>
-						<a href="<?php echo base_url() . "Detail?id=" . $product_id; ?>"><button style="margin:2px;" class="btn btn-primary">Detail</button></a>
+							<?php if($product_stock > 0)  {?>
+								<a href="<?php echo base_url() . "Detail?id=" . $product_id; ?>"><button style="margin:2px;" class="btn btn-primary">BUY NOW</button></a>
+							<?php } ?>
+							<?php if($product_stock <= 0)  {?>
+								<a href=""><button style="margin:2px;" class="btn btn-danger" disabled>SOLD OUT</button></a>
+							<?php } ?>
 					</div>
 					<div class="col-sm-6 col-md-4">
 						<img src="<?php echo $product_pict; ?>" class="img-responsive center-block" style="min-height: 100%;">

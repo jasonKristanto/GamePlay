@@ -30,6 +30,7 @@
 							$product_pict = base_url('assets/pict_product/') . $row['picture'];
 							$product_qty = $row['qty'];
 							$product_price = $row['price'];
+							$product_stock = $row['stock'];
 
 										$total = $product_qty * $product_price;
 
@@ -40,7 +41,7 @@
 							echo "<td class='text-center' style='vertical-align:middle;'>" . $product_name . "</td>";
 											echo "<td class='text-center' style='vertical-align:middle;'>";
 												echo "<form class=\"form-group\" method=\"POST\" action=\"Cart/update_qty?id=" . $product_id . "\">";
-													echo "<input type=\"number\" class=\"form-control\" name=\"cart_qty\" value=\"" . $product_qty . "\" min=1>";
+													echo "<input type=\"number\" class=\"form-control\" name=\"cart_qty\" value=\"" . $product_qty . "\" min=1 max=" . $product_stock . ">";
 													echo "<input type=\"submit\" name=\"Update\" value=\"Update\" class=\"btn btn-primary\">";
 												echo "</form>";
 											echo "</td>";
@@ -63,7 +64,12 @@
 								<th class="text-center" style="vertical-align:middle;">Price</th>
 						<th class="text-center" style="vertical-align:middle;">Total: Rp. <?php echo number_format($grand_total,2) ?></th>
 						<th class="text-center" style="vertical-align:middle;">
+								<?php if(sizeof($product) > 0) { ?>
 									<a href="<?php echo base_url() . "Buy"; ?>"><button class="btn btn-success">Buy</button></a>
+								<?php } ?>
+							<?php if(sizeof($product) == 0) { ?>
+									<a href="<?php echo base_url() . "Buy"; ?>"><button class="btn btn-success" disabled>Buy</button></a>
+								<?php } ?>
 								</th>
 					</tfoot>
 				</table>
@@ -76,8 +82,8 @@
 		</script>
 		<style>
 		.wrapper{
-			min-height: 90%; 
-			min-height: 90vh; 
+			min-height: 90%;
+			min-height: 90vh;
 			display: flex;
 			align-items: center;
 		}
@@ -88,7 +94,7 @@
 			background: #EEEEEE;
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 			border-radius: 5px;
-		} 
+		}
 		</style>
 	</body>
 </html>
