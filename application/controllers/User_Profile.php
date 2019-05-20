@@ -43,7 +43,7 @@ class User_Profile extends CI_Controller {
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
 		$data['error'] = "Password doesn't match";
-		$data['errorNum'] = "Phone number must contain numbers";
+		$data['errorNum'] = "Phone number must contain numbers and have minimal length of 10 and maximal length of 12";
 
 		$data['user'] = $this->User_Model->get_user($this->session->username);
 
