@@ -21,6 +21,9 @@
 					<div class="form-group">
                         <input type="password" name='login_password' class="form-control" placeholder="Password" required>
                     </div>
+					<?php if(isset($_GET['s'])){ ?>
+						<div class="alert alert-warning" align="center">Login failed, please check your username or password</div> 
+					<?php }?>
 					<input class="btn btn-lg btn-primary btn-block" type="submit" name="Login" value="Login">
 				</form>
 				<div class="card-footer text-center">
