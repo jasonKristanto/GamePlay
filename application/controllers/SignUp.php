@@ -15,6 +15,9 @@ class SignUp extends CI_Controller {
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
+		$data['error'] = "Password doesn't match";
+		$data['errorNum'] = "Phone number must contain numbers";
+
 		$this->load->view('pages/SignUp_View.php', $data);
 	}
 
@@ -23,7 +26,21 @@ class SignUp extends CI_Controller {
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
-		
+
+		$username = addslashes(htmlspecialchars($this->input->post('signup_username')));
+		$password = addslashes(htmlspecialchars($this->input->post('signup_password')));
+		$conf_pass = addslashes(htmlspecialchars($this->input->post('signup_confpassword')));
+		$nama = addslashes(htmlspecialchars($this->input->post('signup_nama')));
+		$email = addslashes(htmlspecialchars($this->input->post('signup_email')));
+		$noHP = addslashes(htmlspecialchars($this->input->post('signup_HP')));
+		$alamat = addslashes(htmlspecialchars($this->input->post('signup_alamat')));
+
+		// if(fnmatch("*&lt;*&gt;*", $email) || fnmatch("*&lt;*&gt;*", $pass)){
+		// 	echo "<script>";
+		// 	echo "window.location.href='home.php'";
+		// 	echo "</script>";
+		// }
+
 		if($this->input->post('Submit') && $this->input->post('signup_password') == $this->input->post('signup_confpassword') && is_numeric($this->input->post('signup_HP'))){
 			if(strlen($this->input->post('signup_username')) != 0 && strlen($this->input->post('signup_password')) != 0 && strlen($this->input->post('signup_nama')) != 0 && strlen($this->input->post('signup_email')) != 0 && strlen($this->input->post('signup_HP')) != 0 && strlen($this->input->post('signup_alamat')) != 0){
 				$values = array(
@@ -59,18 +76,22 @@ class SignUp extends CI_Controller {
 	      redirect(base_url() . "SignUp");
 			}
     }
+		else if($this->input->post('Cancel')){
+			$_POST = NULL;
+			$_GET= NULL;
+			redirect(base_url());
+		}
     else {
 			$this->session->set_userdata('signUp', 'gagal');
 			$_POST = NULL;
 			$_GET= NULL;
 			if($this->input->post('signup_password') != $this->input->post('signup_confpassword')){
-				$data['error'] = "Password doesn't match";
+				$this->session->set_userdata('signUp_password', 'gagal');
 			}
 			if(!is_numeric($this->input->post('signup_HP'))){
-				$data['errorNum'] = "Phone number must contain numbers";
+				$this->session->set_userdata('signUp_HP', 'gagal');
 			}
-			$this->load->view('pages/SignUp_View.php', $data);
-      //redirect(base_url() . "SignUp");
+			redirect(base_url() . "SignUp");
     }
   }
 }

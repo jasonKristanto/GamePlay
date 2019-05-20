@@ -57,6 +57,10 @@ class User_Profile extends CI_Controller {
 		$email = $this->input->post('edit_email');
 		$alamat = $this->input->post('edit_alamat');
 
+		if(strlen($this->input->post('edit_retypepassword')) <= 0){
+			$repas = $user[0]['password'];
+		}
+
 		if($this->input->post('Submit') && $password == $repas && is_numeric($nomor_handphone)){
 			if(strlen($this->input->post('edit_username')) <= 0){
 				$username = $user[0]['username'];
@@ -149,7 +153,7 @@ class User_Profile extends CI_Controller {
 			$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 			$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 			$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
-			
+
 			if($password != $repas){
 				$data['error'] = "Password doesn't match";
 			}

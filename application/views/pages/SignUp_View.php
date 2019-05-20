@@ -16,39 +16,45 @@
 				</div>
 				<form class="form-signup" method="POST" action="SignUp/signup">
 					<div class="form-group">
-						<input type="text" class="form-control" name="signup_username" placeholder="Username" required>
+						<input type="text" class="form-control" name="signup_username" placeholder="Username" >
 					</div>
 
 					<div class="form-group">
-						<input type="password" class="form-control" name="signup_password" placeholder="Password" required>
+						<input type="password" class="form-control" name="signup_password" placeholder="Password" >
 					</div>
 
 					<div class="form-group">
-						<input type="password" class="form-control" name="signup_confpassword" placeholder="Confirm Password" required>
+						<input type="password" class="form-control" name="signup_confpassword" placeholder="Confirm Password" >
 					</div>
-					
-					<?php if(isset($error)) 
-						echo "<h5 class='alert alert-warning'>". $error. "</h5>";
+
+					<?php
+						if($this->session->signUp_HP == 'gagal'){
+							echo "<h5 class='alert alert-warning text-center'>". $error. "</h5>";
+							$this->session->unset_userdata('signUp_HP');
+						}
 					?>
 
 					<div class="form-group">
-						<input type="text" class="form-control" name="signup_nama" placeholder="Nama Lengkap" required>
+						<input type="text" class="form-control" name="signup_nama" placeholder="Nama Lengkap" >
 					</div>
 
 					<div class="form-group">
-						<input type="email" class="form-control" name="signup_email" placeholder="Email" required>
+						<input type="email" class="form-control" name="signup_email" placeholder="Email" >
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" name="signup_HP" placeholder="Nomor Handphone" required>
+						<input type="text" class="form-control" name="signup_HP" placeholder="Nomor Handphone" >
 					</div>
 
-					<?php if(isset($errorNum)) 
-						echo "<h5 class='alert alert-warning'>". $errorNum. "</h5>";
+					<?php
+						if($this->session->signUp_password == 'gagal') {
+							echo "<h5 class='alert alert-warning text-center'>". $errorNum. "</h5>";
+							$this->session->unset_userdata('signUp_password');
+						}
 					?>
 
 					<div class="form-group">
-						<textarea class="form-control" name="signup_alamat" placeholder="Alamat Lengkap" rows="5" required></textarea>
+						<textarea class="form-control" name="signup_alamat" placeholder="Alamat Lengkap" rows="5" ></textarea>
 					</div>
 
 					<h5 id='loginFailed' class="text-center" style="color:red;"></h5>
