@@ -12,7 +12,9 @@
                     <div class="form-group">
                         <input type="password" name='password' class="form-control" placeholder="Password">
                     </div>
-                    <span class='red'><?php if(isset($error)) echo $error;?></span>
+				   <?php if(isset($error)){?>
+						<div class="alert alert-warning" align="center">Login failed, please check your username or password</div> 
+					<?php }?>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btnx">Login</button>
