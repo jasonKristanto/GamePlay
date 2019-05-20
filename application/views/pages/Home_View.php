@@ -49,7 +49,6 @@
 									<?php if($product_stock <= 0)  {?>
 										<a href=""><button style="margin:2px;" class="btn btn-danger" disabled>SOLD OUT</button></a>
 									<?php } ?>
-									<a href=""><button style="margin:2px;" class='btn btn-primary'><span class='glyphicon glyphicon-heart'></span></button></a>
 								</div>
 							</div>
 						</div>
