@@ -45,16 +45,13 @@
 									<label class="col-sm-2 col-form-label" for="update_id">Confirm Password</label>
 									<div class="col-sm-4" style="width:50%;">
 										<input type="password" class="form-control" name="edit_retypepassword" value="">
-
-										<?php if($this->session->edit == 'gagal') {
+										<?php if(isset($error)) 
 											echo "<h5 class='alert alert-warning'>". $error. "</h5>";
-											$this->session->unset_userdata('edit');
-											}
 										?>
 									</div>
 								</div>
 							</div>
-
+							
 							<div class="form-group" style="margin-top:20px;">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label"></label>
@@ -81,6 +78,9 @@
 									<label class="col-sm-2 col-form-label" for="update_id">Nomor Handphone</label>
 									<div class="col-sm-4" style="width:50%;">
 										<input type="text" class="form-control" name="edit_HP" value="<?php echo $user[0]['nomor_handphone']; ?>">
+										<?php if(isset($errorNum)) 
+											echo "<h5 class='alert alert-warning'>". $errorNum. "</h5>";
+										?>
 									</div>
 								</div>
 							</div>
