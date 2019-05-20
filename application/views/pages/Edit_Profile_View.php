@@ -45,14 +45,16 @@
 									<label class="col-sm-2 col-form-label" for="update_id">Confirm Password</label>
 									<div class="col-sm-4" style="width:50%;">
 										<input type="password" class="form-control" name="edit_retypepassword" value="">
-										
-										<?php if(isset($error)) 
+
+										<?php if($this->session->edit == 'gagal') {
 											echo "<h5 class='alert alert-warning'>". $error. "</h5>";
+											$this->session->unset_userdata('edit');
+											}
 										?>
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="form-group" style="margin-top:20px;">
 								<div class="form-group row">
 									<label class="col-sm-2 col-form-label"></label>

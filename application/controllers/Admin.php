@@ -33,10 +33,11 @@ class Admin extends CI_Controller {
 		$_GET  = NULL;
 
 		if(sizeof($user) > 0){
-			$this->session->set_userdata('admin', true);
+			$this->session->set_userdata('admin', true);			
 		}
 		else {
 			$this->session->set_userdata('admin', false);
+			$this->session->set_userdata('loginAdmin', 'gagal');
 		}
 		redirect('Admin');
 	}

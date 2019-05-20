@@ -12,9 +12,9 @@
                     <div class="form-group">
                         <input type="password" name='password' class="form-control" placeholder="Password">
                     </div>
-				   <?php if(isset($error)){?>
-						<div class="alert alert-warning" align="center">Login failed, please check your username or password</div> 
-					<?php }?>
+                    <?php if($this->session->loginAdmin == 'gagal'){ ?>
+          						<div class="alert alert-warning" align="center">Login failed, please check your username or password</div>
+          					<?php $this->session->unset_userdata('loginAdmin'); }?>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btnx">Login</button>
@@ -34,7 +34,7 @@
     $(document).ready(function(){
         $('#myModal').modal({
             keyboard: false,
-            show: 
+            show:
                 <?php
                     if(!isset($login) || $login == false) echo "true"; //belom login
                     else echo "false"; //berhasil login

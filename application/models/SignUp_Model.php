@@ -9,7 +9,6 @@
 			$this->db->select('*');
 			$this->db->from('user');
 			$this->db->where('username', $values['username']);
-			$this->db->or_where('nama', $values['nama']);
 			$this->db->or_where('email', $values['email']);
 			$query = $this->db->get();
 

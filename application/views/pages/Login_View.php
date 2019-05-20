@@ -21,9 +21,9 @@
 					<div class="form-group">
                         <input type="password" name='login_password' class="form-control" placeholder="Password" required>
                     </div>
-					<?php if(isset($_GET['s'])){ ?>
-						<div class="alert alert-warning" align="center">Login failed, please check your username or password</div> 
-					<?php }?>
+					<?php if($this->session->login == 'gagal'){ ?>
+						<div class="alert alert-warning" align="center">Login failed, please check your username or password</div>
+					<?php $this->session->unset_userdata('login'); }?>
 					<input class="btn btn-lg btn-primary btn-block" type="submit" name="Login" value="Login">
 				</form>
 				<div class="card-footer text-center">
@@ -34,8 +34,8 @@
 	</body>
 	<style>
 		.wrapper{
-			min-height: 75%; 
-			min-height: 75vh; 
+			min-height: 75%;
+			min-height: 75vh;
 			display: flex;
 			align-items: center;
 		}
@@ -45,11 +45,11 @@
 			background: #EEEEEE;
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 			border-radius: 5px;
-		} 
+		}
 		.card > form {
 			margin:10px;
-		} 
-		.card > form input[type=text], 
+		}
+		.card > form input[type=text],
 		.card > form input[type=password] {
 			height: 40px;
 			text-align: center;

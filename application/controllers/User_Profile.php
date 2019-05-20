@@ -41,6 +41,7 @@ class User_Profile extends CI_Controller {
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
+		$data['error'] = "Password doesn't match";
 
 		$data['user'] = $this->User_Model->get_user($this->session->username);
 
@@ -55,7 +56,7 @@ class User_Profile extends CI_Controller {
 		$nama = $this->input->post('edit_nama');
 		$nomor_handphone = $this->input->post('edit_HP');
 		$email = $this->input->post('edit_email');
-		$alamat = $this->input->post('edit_alamat');		
+		$alamat = $this->input->post('edit_alamat');
 
 		if($this->input->post('Submit') && $password == $repas){
 			if(strlen($this->input->post('edit_username')) <= 0){
@@ -145,17 +146,17 @@ class User_Profile extends CI_Controller {
 			$this->session->set_userdata('edit', 'gagal');
 			$_POST = NULL;
 			$_GET= NULL;
-			$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
-			$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
-			$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
-			$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
-			$data['error'] = "Password doesn't match";
-			$data['user'] = $this->User_Model->get_user($this->session->username);
+			// $data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
+			// $data['css'] = $this->load->view('include/css.php', NULL, TRUE);
+			// $data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
+			// $data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
+			// $data['error'] = "Password doesn't match";
+			// $data['user'] = $this->User_Model->get_user($this->session->username);
+			//
+			// $this->load->view('pages/Edit_Profile_View.php', $data);
 
-			$this->load->view('pages/Edit_Profile_View.php', $data);
 
-			
-			//redirect(base_url() . "User_Profile/edit_profile");
+			redirect(base_url() . "User_Profile/edit_profile");
     }
 	}
 }
