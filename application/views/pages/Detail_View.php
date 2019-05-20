@@ -29,7 +29,7 @@
 						</div>
 						<form class="form-group" method="POST" action="Detail/detail" >
 							<div class="form-group">
-									<input type="hidden" class="form-control" name="detail_ID" value=" <?php echo $product[0]['ID']; ?>">
+									<input type="hidden" class="form-control" name="detail_ID" value="<?php echo $product[0]['ID']; ?>">
 									<div class="form-group row">
 										<label class="col-sm-2"></label>
 										<label class="col-sm-2 col-form-label" for="detail_qty">Stock</label>

@@ -19,8 +19,8 @@ class Buy extends CI_Controller {
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
-		$data['product'] = $this->Buy_Model->get_products();
 		$data['user'] = $this->Buy_Model->get_user($this->session->username);
+		$data['product'] = $this->Buy_Model->get_products($data['user'][0]['id']);
 
 		if(sizeof($data['product']) <= 0){
 			redirect(base_url());
@@ -39,14 +39,26 @@ class Buy extends CI_Controller {
 			redirect(base_url() . "Login");
 		}
 
-		$checkout_product = $this->Buy_Model->get_products();
+		$ID_Cust = $this->Buy_Model->get_ID_cust($this->session->username);
+		$last_ID_trans = $this->Buy_Model->get_ID_trans();
+		$checkout_product = $this->Buy_Model->get_products($ID_Cust[0]['id']);
+
+		echo "<pre>";
+		print_r($checkout_product);
+		echo "</pre>";
 
 		if(sizeof($checkout_product) <= 0){
+			$this->session->set_userdata('checkout', 'gagal');
 			redirect(base_url());
 		}
 
-		$ID_Cust = $this->Buy_Model->get_ID_cust($this->session->username);
-		$last_ID_trans = $this->Buy_Model->get_ID_trans();
+		for ($i=0; $i < sizeof($checkout_product); $i++) {
+			if($checkout_product[$i]['qty'] <= 0 && $checkout_product[$i]['qty'] > $checkout_product[$i]['stock']){
+				$this->session->set_userdata('checkout', 'gagal');
+				redirect(base_url());
+			}
+		}
+
 		$trans_detail = array();
 		$update_stock = array();
 
@@ -92,10 +104,12 @@ class Buy extends CI_Controller {
 		$_POST = NULL;
 		$_GET= NULL;
 
-		$this->Buy_Model->update_product($update_stock);
-		$this->Buy_Model->checkout($trans, $trans_detail);
+		// $this->Buy_Model->update_product($update_stock);
+		// $this->Buy_Model->checkout($trans, $trans_detail);
 		$this->Buy_Model->clearCart($ID_Cust[0]['id']);
 
-		redirect(base_url() . "?success=1");
+		// $this->session->set_userdata('checkout', 'sukses');
+		//
+		// redirect(base_url());
 	}
 }

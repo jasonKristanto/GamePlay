@@ -30,6 +30,7 @@ class Login extends CI_Controller {
 		}
 		else if(sizeof($login_user) > 0){
 			$user = array(
+				'id' => $login_user[0]['id'],
 				'nama'  => $login_user[0]['nama'] ,
 				'username' => $login_user[0]['username'],
 				'email' => $login_user[0]['email'],
@@ -43,7 +44,11 @@ class Login extends CI_Controller {
   }
 
 	public function logout(){
-		$this->session->unset_userdata('nama', 'username', 'email', 'login');
+		$this->session->unset_userdata('nama');
+		$this->session->unset_userdata('id');
+		$this->session->unset_userdata('username');
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('login');
 
 		redirect(base_url());
 	}

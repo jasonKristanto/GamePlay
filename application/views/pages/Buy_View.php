@@ -87,12 +87,12 @@
 				</div>
                 <div class="col-md-8">
 					<table id="myTable" class="table table-striped table-bordered" style="width:100%">
-						<thead>	
+						<thead>
 							<th class="text-center" style="vertical-align:middle;">Picture</th>
 							<th class="text-center" style="vertical-align:middle;">Product Name</th>
 							<th class="text-center" style="vertical-align:middle;">Quantity</th>
-							<th class="text-center" style="vertical-align:middle;">Price</th>
-							<th class="text-center" style="vertical-align:middle;">Total</th>
+							<th class="text-center" style="vertical-align:middle;">Price (dalam Rupiah)</th>
+							<th class="text-center" style="vertical-align:middle;">Total (dalam Rupiah)</th>
 						</thead>
 						<tbody>
 							<?php
@@ -107,8 +107,8 @@
 												echo "<td class='text-center' style='vertical-align:middle;'><img style=\"max-width: 100px;\" src='" . $product_pict . "'></td>";
 								echo "<td class='text-center' style='vertical-align:middle;'>" . $product_name . "</td>";
 												echo "<td class='text-center' style='vertical-align:middle;'>" . $product_qty . "</td>";
-												echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($product_price,2) . "</td>";
-								echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($total,2) . "</td>";
+												echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($product_price,2) . "</td>";
+								echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($total,2) . "</td>";
 
 								echo "</tr>";
 							}
@@ -118,7 +118,7 @@
 							<th class="text-center" style="vertical-align:middle;">Picture</th>
 							<th class="text-center" style="vertical-align:middle;">Product Name</th>
 							<th class="text-center" style="vertical-align:middle;">Quantity</th>
-							<th class="text-center" style="vertical-align:middle;">Price</th>
+							<th class="text-center" style="vertical-align:middle;">Price (dalam Rupiah)</th>
 							<th class="text-center" style="vertical-align:middle;">Total: Rp. <?php echo number_format($grand_total,2) ?></th>
 						</tfoot>
 					</table>
@@ -157,8 +157,8 @@
 		</script>
 		<style>
 			.wrapper{
-				min-height: 90%; 
-				min-height: 90vh; 
+				min-height: 90%;
+				min-height: 90vh;
 				display: flex;
 				align-items: center;
 			}
@@ -169,7 +169,7 @@
 				background: #EEEEEE;
 				box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 				border-radius: 5px;
-			} 
+			}
 		</style>
 	</body>
 </html>

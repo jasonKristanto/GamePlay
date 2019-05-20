@@ -31,9 +31,9 @@
 									<th class="text-center">ID Customer</th>
 									<th class="text-center">Tanggal Transaksi</th>
 									<th class="text-center">Jenis Pengiriman</th>
-									<th class="text-center">Biaya Pengiriman</th>
+									<th class="text-center">Biaya Pengiriman (dalam Rupiah)</th>
 									<th class="text-center">Jenis Pembayaran</th>
-									<th class="text-center">Total Pembayaran</th>
+									<th class="text-center">Total Pembayaran (dalam Rupiah)</th>
 									<th class="text-center">Action</th>
 								</thead>
 								<tbody>
@@ -55,9 +55,9 @@
 												echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_cust . "</td>";
 												echo "<td class='text-center' style='vertical-align:middle;'>" . date("F d, h:i A", $row['tanggalTransaksi']) . "</td>";
 												echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_kirim . "</td>";
-												echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_biaya_kirim,2) . "</td>";
+												echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($trans_biaya_kirim,2) . "</td>";
 												echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_jenis_pembayaran . "</td>";
-												echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_grand_total,2) . "</td>";
+												echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($trans_grand_total,2) . "</td>";
 												echo "<td class='text-center' style='vertical-align:middle;'><a href=\"" . base_url() . "Admin_Transaction/trans_detail?id=" . $trans_id . "\"><button style=\"margin:2px;\" class=\"btn btn-primary\">Detail</button></a></td>";
 											echo "</tr>";
 										}

@@ -56,9 +56,9 @@
 							<thead>
 								<th class="text-center">Nama Product</th>
 								<th class="text-center"></th>
-								<th class="text-center">Harga Product</th>
+								<th class="text-center">Harga Product (dalam Rupiah)</th>
 								<th class="text-center">Kuantitas</th>
-								<th class="text-center">Total Harga</th>
+								<th class="text-center">Total Harga (dalam Rupiah)</th>
 							</thead>
 							<tbody>
 								<?php
@@ -76,9 +76,9 @@
 										echo "<tr>";
 											echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_product . "</td>";
 											echo "<td class='text-center' style='vertical-align:middle;'><img style=\"max-width: 100px;\" src='" . $trans_pict . "'></td>";
-											echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_harga,2) . "</td>";
+											echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($trans_harga,2) . "</td>";
 											echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_qty . "</td>";
-											echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_total,2) . "</td>";
+											echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($trans_total,2) . "</td>";
 										echo "</tr>";
 										$ctr += 1;
 									}
@@ -87,9 +87,9 @@
 							<tfoot>
 								<th class="text-center">Nama Product</th>
 								<th class="text-center"></th>
-								<th class="text-center">Harga Product</th>
+								<th class="text-center">Harga Product (dalam Rupiah)</th>
 								<th class="text-center">Kuantitas</th>
-								<th class="text-center">Total Harga</th>
+								<th class="text-center">Total Harga (dalam Rupiah)</th>
 							</tfoot>
 						</table>
 					</div>

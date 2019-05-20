@@ -17,8 +17,8 @@
 						<th class="text-center">Picture</th>
 								<th class="text-center">Product Name</th>
 						<th class="text-center">Quantity</th>
-						<th class="text-center">Price</th>
-						<th class="text-center">Total</th>
+						<th class="text-center">Price (dalam Rupiah)</th>
+						<th class="text-center">Total (dalam Rupiah)</th>
 						<th class="text-center">Action</th>
 					</thead>
 					<tbody>
@@ -40,17 +40,17 @@
 											echo "<td class='text-center' style='vertical-align:middle;'><img style=\"max-width: 100px;\" src='" . $product_pict . "'></td>";
 							echo "<td class='text-center' style='vertical-align:middle;'>" . $product_name . "</td>";
 											echo "<td class='text-center' style='vertical-align:middle;'>";
-												echo "<form class=\"form-group\" method=\"POST\" action=\"Cart/update_qty?id=" . $product_id . "\">";
+												echo "<form class=\"form-group\" method=\"POST\" action=\"" . base_url() . "Cart/update_qty?id=" . $product_id . "\">";
 													echo "<input type=\"number\" class=\"form-control\" name=\"cart_qty\" value=\"" . $product_qty . "\" min=1 max=" . $product_stock . ">";
 													echo "<input type=\"submit\" name=\"Update\" value=\"Update\" class=\"btn btn-primary\">";
 												echo "</form>";
 											echo "</td>";
-											echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($product_price,2) . "</td>";
-							echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($total,2) . "</td>";
+											echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($product_price,2) . "</td>";
+							echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($total,2) . "</td>";
 
 							echo "<td class='text-center' style=\"vertical-align:middle\";>";
 												echo "<div class=\"form-group row\">";
-								echo "<a href='Cart/remove?id=" . $product_id . "'><button class=\"btn btn-danger\">Remove</button></a>";
+								echo "<a href='" . base_url() . "Cart/remove?id=" . $product_id . "'><button class=\"btn btn-danger\">Remove</button></a>";
 												echo "</div>";
 							echo "</td>";
 							echo "</tr>";

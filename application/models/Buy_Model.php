@@ -1,8 +1,9 @@
 <?php
 	class Buy_Model extends CI_Model {
-		public function get_products(){
+		public function get_products($value){
       $this->db->select('*');
       $this->db->from('cart');
+			$this->db->where('ID_cust', $value);
       $this->db->join('product', 'product.ID = cart.ID_product');
       $query = $this->db->get();
 
@@ -53,9 +54,9 @@
 			return $query->result_array();
 		}
 
-		public function clearCart($value){
-			$query = $this->db->delete('cart', array('ID_cust' => $value));
-			print_r($query);
+		public function clearCart($value){			
+			$this->db->where('ID_cust', $value);
+			$this->db->delete('cart');
 		}
 	}
 ?>

@@ -51,12 +51,12 @@
 								</div>
 								<div class="row" style="margin-bottom:5px;">
 									<label class="col-md-3 col-form-label" style="vertical-align:middle;">Jenis Pembayaran</label>
-									<label class="col-md-9 col-form-label" style="vertical-align:middle;">Total Pembayaran</label>
+									<label class="col-md-9 col-form-label" style="vertical-align:middle;">Total Pembayaran  (dalam Rupiah)</label>
 									<div class="">
 										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $trans_detail[0]['jenis_pembayaran']; ?></p>
 									</div>
 									<div class="">
-										<p class="col-md-9 col-form-label" style="vertical-align:middle;">Rp. <?php echo number_format($total+$trans_detail[0]['biaya_kirim'], 2); ?></p>
+										<p class="col-md-9 col-form-label" style="vertical-align:middle;"<?php echo number_format($total+$trans_detail[0]['biaya_kirim'], 2); ?></p>
 									</div>
 								</div>
 							</div>
@@ -65,9 +65,9 @@
 									<th class="text-center">ID Transaction</th>
 									<th class="text-center">Nama Customer</th>
 									<th class="text-center">Nama Product</th>
-									<th class="text-center">Harga Product</th>
+									<th class="text-center">Harga Product (dalam Rupiah)</th>
 									<th class="text-center">Kuantitas</th>
-									<th class="text-center">Total Harga</th>
+									<th class="text-center">Total Harga (dalam Rupiah)</th>
 								</thead>
 								<tbody>
 									<?php
@@ -86,9 +86,9 @@
 												echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_id . "</td>";
 												echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_customer . "</td>";
 												echo "<td class='text-center' style='vertical-align:middle;'>" . $trans_product . "</td>";
-												echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_harga,2) . "</td>";
+												echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($trans_harga,2) . "</td>";
 												echo "<td class='text-center'  style='vertical-align:middle;'>" . $trans_qty . "</td>";
-												echo "<td class='text-center' style='vertical-align:middle;'>Rp. " . number_format($trans_total,2) . "</td>";
+												echo "<td class='text-center' style='vertical-align:middle;'>" . number_format($trans_total,2) . "</td>";
 											echo "</tr>";
 										}
 									?>

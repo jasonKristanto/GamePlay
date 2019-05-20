@@ -19,7 +19,8 @@ class Cart extends CI_Controller {
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
-    $data['product'] = $this->Cart_Model->get_products();
+		$data['user'] = $this->Cart_Model->get_ID_cust($this->session->username);
+		$data['product'] = $this->Cart_Model->get_products($data['user'][0]['id']);
 
 		$this->load->view('pages/Cart_View.php', $data);
 	}
@@ -29,12 +30,11 @@ class Cart extends CI_Controller {
 			redirect(base_url() . "Login");
 		}
 
-		$product = $this->Cart_Model->get_product($_GET['id']);
-		$product_cart = $this->Cart_Model->get_product_cart($_GET['id']);
-
-		$qty = $_GET['qty'];
-
 		$ID_Cust = $this->Cart_Model->get_ID_cust($this->session->username);
+		$product = $this->Cart_Model->get_product($_GET['id']);
+		$product_cart = $this->Cart_Model->get_product_cart($_GET['id'], $ID_Cust[0]['id']);
+		print_r($ID_Cust[0]['id']);
+		$qty = $_GET['qty'];
 
 		if(sizeof($product_cart) > 0){
 			$qty += $product_cart[0]['qty'];
@@ -45,7 +45,6 @@ class Cart extends CI_Controller {
 				'productName' => $product[0]['productName'],
 				'qty' => $qty
 			);
-
 			$this->Cart_Model->replace_product($values);
 		}
 		else {
@@ -77,7 +76,8 @@ class Cart extends CI_Controller {
 			redirect(base_url() . "Login");
 		}
 
-		$this->Cart_Model->remove_product($_GET['id']);
+		$ID_Cust = $this->Cart_Model->get_ID_cust($this->session->username);
+		$this->Cart_Model->remove_product($_GET['id'], $ID_Cust[0]['id']);
 
 		$_POST = NULL;
 		$_GET= NULL;
@@ -90,10 +90,12 @@ class Cart extends CI_Controller {
 			redirect(base_url() . "Login");
 		}
 
-		$product_cart = $this->Cart_Model->get_product_cart($_GET['id']);
+		$ID_Cust = $this->Cart_Model->get_ID_cust($this->session->username);
+		$product_cart = $this->Cart_Model->get_product_cart($_GET['id'], $ID_Cust[0]['id']);
 
 		if(sizeof($product_cart) > 0){
 			$values = array(
+				'ID_cust' => $ID_Cust[0]['id'],
 				'ID_product' => $product_cart[0]['ID_product'],
 				'productName' => $product_cart[0]['productName'],
 				'qty' => $_POST['cart_qty']
