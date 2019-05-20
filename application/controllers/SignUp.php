@@ -19,7 +19,12 @@ class SignUp extends CI_Controller {
 	}
 
   public function signUp(){
-		if($this->input->post('Submit')){
+		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
+		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
+		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
+		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
+		$data['error'] = "Password doesn't match";
+		if($this->input->post('Submit') && $this->input->post('signup_password') == $this->input->post('signup_confpassword')){
 			if(strlen($this->input->post('signup_username')) != 0 && strlen($this->input->post('signup_password')) != 0 && strlen($this->input->post('signup_nama')) != 0 && strlen($this->input->post('signup_email')) != 0 && strlen($this->input->post('signup_HP')) != 0 && strlen($this->input->post('signup_alamat')) != 0){
 				$values = array(
 	        'username' => $this->input->post('signup_username'),
@@ -58,7 +63,8 @@ class SignUp extends CI_Controller {
 			$this->session->set_userdata('signUp', 'gagal');
 			$_POST = NULL;
 			$_GET= NULL;
-      redirect(base_url() . "SignUp");
+			$this->load->view('pages/SignUp_View.php', $data);
+      //redirect(base_url() . "SignUp");
     }
   }
 }
