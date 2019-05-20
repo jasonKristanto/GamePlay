@@ -24,6 +24,14 @@
 					</div>
 
 					<div class="form-group">
+						<input type="password" class="form-control" name="signup_confpassword" placeholder="Confirm Password" required>
+					</div>
+					
+					<?php if(isset($error)) 
+						echo "<h5 class='alert alert-warning'>". $error. "</h5>";
+					?>
+
+					<div class="form-group">
 						<input type="text" class="form-control" name="signup_nama" placeholder="Nama Lengkap" required>
 					</div>
 
