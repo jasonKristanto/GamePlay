@@ -24,9 +24,8 @@ class Login extends CI_Controller {
 
   public function login(){
     $login_user = $this->Login_Model->get_user($_POST['login_username'], $_POST['login_password']);
-
 		if(sizeof($login_user) == 0){
-			redirect(base_url() . "Login");
+			redirect(base_url() . "Login?s=0");
 		}
 		else if(sizeof($login_user) > 0){
 			$user = array(
