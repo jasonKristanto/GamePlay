@@ -43,6 +43,10 @@
 						<input type="text" class="form-control" name="signup_HP" placeholder="Nomor Handphone" required>
 					</div>
 
+					<?php if(isset($errorNum)) 
+						echo "<h5 class='alert alert-warning'>". $errorNum. "</h5>";
+					?>
+
 					<div class="form-group">
 						<textarea class="form-control" name="signup_alamat" placeholder="Alamat Lengkap" rows="5" required></textarea>
 					</div>
