@@ -49,15 +49,15 @@ class User_Profile extends CI_Controller {
 
 	public function edit_action(){
 		$user = $this->User_Model->get_user($this->session->username);
+		$username = $this->input->post('edit_username');
+		$password = $this->input->post('edit_password');
+		$repas = $this->input->post('edit_retypepassword');
+		$nama = $this->input->post('edit_nama');
+		$nomor_handphone = $this->input->post('edit_HP');
+		$email = $this->input->post('edit_email');
+		$alamat = $this->input->post('edit_alamat');		
 
-		if($this->input->post('Submit')){
-			$username = $this->input->post('edit_username');
-			$password = $this->input->post('edit_password');
-			$nama = $this->input->post('edit_nama');
-			$nomor_handphone = $this->input->post('edit_HP');
-			$email = $this->input->post('edit_email');
-			$alamat = $this->input->post('edit_alamat');
-
+		if($this->input->post('Submit') && $password == $repas){
 			if(strlen($this->input->post('edit_username')) <= 0){
 				$username = $user[0]['username'];
 			}
@@ -145,7 +145,17 @@ class User_Profile extends CI_Controller {
 			$this->session->set_userdata('edit', 'gagal');
 			$_POST = NULL;
 			$_GET= NULL;
-      redirect(base_url() . "User_Profile/edit_profile");
+			$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
+			$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
+			$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
+			$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
+			$data['error'] = "Password doesn't match";
+			$data['user'] = $this->User_Model->get_user($this->session->username);
+
+			$this->load->view('pages/Edit_Profile_View.php', $data);
+
+			
+			//redirect(base_url() . "User_Profile/edit_profile");
     }
 	}
 }
