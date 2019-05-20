@@ -10,7 +10,7 @@
 	<body class="bgGrey2">
 		<?php echo $header; ?>
 		<div class="container-fluid wrapper">
-			<div class="card" style="width:300px;">
+			<div class="card">
 				<div class="card-header">
 					<h4 class="modal-title text-center"><span style="color:black;">Game<strong style="color:blue;">Play</strong> Sign Up</span></h4>
 				</div>
@@ -83,6 +83,8 @@
 			float: auto;
 			margin: 2% auto 2%;
 			background: #EEEEEE;
+			width: 30%;
+			min-width: 300px;
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 			border-radius: 5px;
 		}
@@ -93,7 +95,7 @@
 		.card > form input[type=password],
 		.card > form input[type=email] {
 			height: 40px;
-			text-align: center;
+			text-align: left;
 			text-decoration: none;
 			display: inline-block;
 			font-size: 16px;

@@ -8,7 +8,7 @@
 
 		<title>Transaction</title>
 	</head>
-	<body class="bgGrey">
+	<body class="bgGrey2">
 			<?php
 				echo $header;
 				$total = 0;
@@ -109,7 +109,7 @@
 		}
 		.card {
 			float: auto;
-			margin: auto;
+			margin: 3% auto 3%;
 			margin-top: 1%;
 			padding: 1%;
 			background: #EEEEEE;

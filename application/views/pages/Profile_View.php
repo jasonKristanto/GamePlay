@@ -55,8 +55,8 @@
 					</div>
 				</div>
 
-	      <div class="col-md-8">
-					<table id="myTable" align="center" class="table table-striped table-bordered" style="width:50%">
+				<div class="col-md-8">
+					<table id="myTable" align="center" class="table table-striped table-bordered">
 						<thead>
 							<th class="text-center">Nomor Transaksi</th>
 							<th class="text-center">Tanggal Transaksi</th>
@@ -120,6 +120,8 @@
 				margin: 3% auto 3%;
 				margin-top: 1%;
 				padding: 1%;
+				width: 80%;
+				min-width: 300px;
 				background: #EEEEEE;
 				box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 				border-radius: 5px;
