@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<?php
+			date_default_timezone_set("Asia/Jakarta");
 			echo $js;
 			echo $css;
 		?>
@@ -24,9 +25,21 @@
 				<div class="card">
 					<div class="col-md-12">
 						<div class="row" style="margin-bottom:5px;">
-							<label class="col-md-12 col-form-label" style="vertical-align:middle;">Tanggal Transaksi</label>
+							<label class="col-md-3 col-form-label" style="vertical-align:middle;">Tanggal Transaksi</label>
+							<label class="col-md-3 col-form-label" style="vertical-align:middle;">Nama Penerima</label>
+							<label class="col-md-3 col-form-label" style="vertical-align:middle;">Nomor Handphone Penerima</label>
+							<label class="col-md-3 col-form-label" style="vertical-align:middle;">Alamat Penerima</label>
 							<div class="">
-								<p class="col-md-12 col-form-label" style="vertical-align:middle;"><?php echo date("F d, h:i A", $transaction[0]['tanggalTransaksi']); ?></p>
+								<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo date("F d, h:i A", $transaction[0]['tanggalTransaksi']); ?></p>
+							</div>
+							<div class="">
+								<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $transaction[0]['nama_penerima']; ?></p>
+							</div>
+							<div class="">
+								<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $transaction[0]['noHP_penerima']; ?></p>
+							</div>
+							<div class="">
+								<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $transaction[0]['alamat_penerima']; ?></p>
 							</div>
 						</div>
 						<div class="row" style="margin-bottom:5px;">

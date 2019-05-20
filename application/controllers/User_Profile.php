@@ -42,6 +42,9 @@ class User_Profile extends CI_Controller {
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
+		$data['error'] = "Password doesn't match";
+		$data['errorNum'] = "Phone number must contain numbers";
+
 		$data['user'] = $this->User_Model->get_user($this->session->username);
 
 		$this->load->view('pages/Edit_Profile_View.php', $data);
@@ -49,19 +52,31 @@ class User_Profile extends CI_Controller {
 
 	public function edit_action(){
 		$user = $this->User_Model->get_user($this->session->username);
-		$username = $this->input->post('edit_username');
-		$password = $this->input->post('edit_password');
-		$repas = $this->input->post('edit_retypepassword');
-		$nama = $this->input->post('edit_nama');
-		$nomor_handphone = $this->input->post('edit_HP');
-		$email = $this->input->post('edit_email');
-		$alamat = $this->input->post('edit_alamat');
+
+		$username = addslashes($this->security->xss_clean($this->input->post('edit_username')));
+		$password = addslashes($this->security->xss_clean($this->input->post('edit_password')));
+		$repas =  addslashes($this->security->xss_clean($this->input->post('edit_retypepassword')));
+		$nama = addslashes($this->security->xss_clean($this->input->post('edit_nama')));
+		$nomor_handphone = addslashes($this->security->xss_clean($this->input->post('edit_HP')));
+		$email = addslashes($this->security->xss_clean($this->input->post('edit_email')));
+		$alamat = addslashes($this->security->xss_clean($this->input->post('edit_alamat')));
+
+		if (strpos($username, "[removed]") !== false || strpos($password, "[removed]") !== false || strpos($repas, "[removed]") !== false || strpos($nama, "[removed]") !== false || strpos($email, "[removed]") !== false || strpos($nomor_handphone, "[removed]") !== false || strpos($alamat, "[removed]") !== false) {
+			$this->session->set_userdata('edit', 'gagal');
+			redirect(base_url() . "User_Profile/edit_profile");
+		}
+
+		if(!is_numeric($nomor_handphone) || !(strlen($nomor_handphone) != 0 && strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
+			$this->session->set_userdata('edit', 'gagal');
+			$this->session->set_userdata('editHP', 'gagal');
+			redirect(base_url() . "User_Profile/edit_profile");
+		}
 
 		if(strlen($this->input->post('edit_retypepassword')) <= 0){
 			$repas = $user[0]['password'];
 		}
 
-		if($this->input->post('Submit') && $password == $repas && is_numeric($nomor_handphone)){
+		if($this->input->post('Submit') && $password == $repas){
 			if(strlen($this->input->post('edit_username')) <= 0){
 				$username = $user[0]['username'];
 			}
@@ -123,12 +138,18 @@ class User_Profile extends CI_Controller {
 
 			if(sizeof($user_validate) >= 2){
 				for ($i=0; $i < sizeof($user_validate); $i++) {
-					if($user_validate['username'] == $values['username'] && $values['username'] != $user[0]['username']){
+					echo $user_validate[$i]['username'] . "<br>";
+					echo $values['username'] . "<br>";
+					echo $values['username'] . "<br>";
+					echo $user[0]['username'] . "<br>";
+					if($user_validate[$i]['username'] == $values['username'] && $values['username'] != $user[0]['username']){
 						$this->session->set_userdata('edit', 'sama');
 						$_POST = NULL;
 						$_GET= NULL;
 						redirect(base_url() . "User_Profile/edit_profile");
+						echo "masuk";
 					}
+					echo "<br>";
 				}
 			}
 
@@ -147,26 +168,19 @@ class User_Profile extends CI_Controller {
 		}
     else {
 			$this->session->set_userdata('edit', 'gagal');
+
 			$_POST = NULL;
 			$_GET= NULL;
-			$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
-			$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
-			$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
-			$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
 			if($password != $repas){
-				$data['error'] = "Password doesn't match";
+				$this->session->set_userdata('editPass', 'gagal');
 			}
+
 			if(!is_numeric($nomor_handphone)){
-				$data['errorNum'] = "Phone number must contain numbers";
+				$this->session->set_userdata('editHP', 'gagal');
 			}
 
-			$data['user'] = $this->User_Model->get_user($this->session->username);
-
-			$this->load->view('pages/Edit_Profile_View.php', $data);
-
-
-			//redirect(base_url() . "User_Profile/edit_profile");
-    }
+			redirect(base_url() . "User_Profile/edit_profile");
+  	}
 	}
 }

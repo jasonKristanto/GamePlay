@@ -34,7 +34,13 @@ class Home extends CI_Controller {
 			redirect(base_url());
 		}
 
-		$data['product'] = $this->Home_Model->get_product($_POST['search']);
+		$search = addslashes($this->security->xss_clean($_POST['search']));
+
+		if(strpos($search, "[removed]") !== false){
+			redirect(base_url());
+		}
+
+		$data['product'] = $this->Home_Model->get_product($search);
 
 		$_POST = NULL;
 		$_GET= NULL;

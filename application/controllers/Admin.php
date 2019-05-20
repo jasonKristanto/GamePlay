@@ -27,13 +27,22 @@ class Admin extends CI_Controller {
 	}
 
 	public function login(){
+		$username = addslashes($this->security->xss_clean($_POST['username']));
+		$pass = addslashes($this->security->xss_clean($_POST['password']));
+
+		if(fnmatch("*[[]removed[]]*", $username) || fnmatch("*[[]removed[]]*", $pass)){
+			$this->session->set_userdata('loginAdmin', 'gagal');
+			$this->session->set_userdata('admin', false);
+			redirect(base_url() . "Login");
+		}
+
 		$user = $this->Admin_Home_Model->get_admin($_POST['username'], $_POST['password']);
 
 		$_POST = NULL;
 		$_GET  = NULL;
 
 		if(sizeof($user) > 0){
-			$this->session->set_userdata('admin', true);			
+			$this->session->set_userdata('admin', true);
 		}
 		else {
 			$this->session->set_userdata('admin', false);

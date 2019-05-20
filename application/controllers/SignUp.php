@@ -27,29 +27,45 @@ class SignUp extends CI_Controller {
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
-		$username = addslashes(htmlspecialchars($this->input->post('signup_username')));
-		$password = addslashes(htmlspecialchars($this->input->post('signup_password')));
-		$conf_pass = addslashes(htmlspecialchars($this->input->post('signup_confpassword')));
-		$nama = addslashes(htmlspecialchars($this->input->post('signup_nama')));
-		$email = addslashes(htmlspecialchars($this->input->post('signup_email')));
-		$noHP = addslashes(htmlspecialchars($this->input->post('signup_HP')));
-		$alamat = addslashes(htmlspecialchars($this->input->post('signup_alamat')));
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
 
-		// if(fnmatch("*&lt;*&gt;*", $email) || fnmatch("*&lt;*&gt;*", $pass)){
-		// 	echo "<script>";
-		// 	echo "window.location.href='home.php'";
-		// 	echo "</script>";
-		// }
+		$username = addslashes($this->security->xss_clean($this->input->post('signup_username')));
+		$password = addslashes($this->security->xss_clean($this->input->post('signup_password')));
+		$conf_pass = addslashes($this->security->xss_clean($this->input->post('signup_confpassword')));
+		$nama = addslashes($this->security->xss_clean($this->input->post('signup_nama')));
+		$email = addslashes($this->security->xss_clean($this->input->post('signup_email')));
+		$noHP = addslashes($this->security->xss_clean($this->input->post('signup_HP')));
+		$alamat = addslashes($this->security->xss_clean($this->input->post('signup_alamat')));
 
-		if($this->input->post('Submit') && $this->input->post('signup_password') == $this->input->post('signup_confpassword') && is_numeric($this->input->post('signup_HP'))){
-			if(strlen($this->input->post('signup_username')) != 0 && strlen($this->input->post('signup_password')) != 0 && strlen($this->input->post('signup_nama')) != 0 && strlen($this->input->post('signup_email')) != 0 && strlen($this->input->post('signup_HP')) != 0 && strlen($this->input->post('signup_alamat')) != 0){
+		echo $username . "<br>";
+		echo $password . "<br>";
+		echo $conf_pass . "<br>";
+		echo $nama . "<br>";
+		echo $email . "<br>";
+		echo $noHP . "<br>";
+		echo $alamat . "<br>";
+
+		if (strpos($username, "[removed]") !== false || strpos($password, "[removed]") !== false || strpos($conf_pass, "[removed]") !== false || strpos($nama, "[removed]") !== false || strpos($email, "[removed]") !== false || strpos($noHP, "[removed]") !== false || strpos($alamat, "[removed]") !== false) {
+			$this->session->set_userdata('signUp', 'gagal');
+			redirect(base_url() . "SignUp");
+		}
+
+		if(!is_numeric($noHP)){
+			$this->session->set_userdata('signUp', 'gagal');
+			redirect(base_url() . "SignUp");
+		}
+
+		if($this->input->post('Submit') && $password == $conf_pass) {
+			if(strlen($username) != 0 && strlen($password) != 0 && strlen($conf_pass) != 0 && strlen($nama) != 0 && strlen($email) != 0 && (strlen($noHP) != 0 && strlen($noHP) >= 10 && strlen($noHP) <= 12) && strlen($alamat) != 0){
 				$values = array(
-	        'username' => $this->input->post('signup_username'),
-	        'password' => $this->input->post('signup_password'),
-	        'nama' => $this->input->post('signup_nama'),
-					'nomor_handphone' =>$this->input->post('signup_HP'),
-	        'email' => $this->input->post('signup_email'),
-	        'alamat' => $this->input->post('signup_alamat'),
+	        'username' => $username,
+	        'password' => $password,
+	        'nama' => $conf_pass,
+					'nomor_handphone' => $noHP,
+	        'email' => $email,
+	        'alamat' => $alamat,
 					'picture' => "profilePict.png"
 	      );
 
@@ -85,10 +101,10 @@ class SignUp extends CI_Controller {
 			$this->session->set_userdata('signUp', 'gagal');
 			$_POST = NULL;
 			$_GET= NULL;
-			if($this->input->post('signup_password') != $this->input->post('signup_confpassword')){
+			if($password != $conf_pass){
 				$this->session->set_userdata('signUp_password', 'gagal');
 			}
-			if(!is_numeric($this->input->post('signup_HP'))){
+			if(!is_numeric($noHP)){
 				$this->session->set_userdata('signUp_HP', 'gagal');
 			}
 			redirect(base_url() . "SignUp");

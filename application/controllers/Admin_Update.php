@@ -40,6 +40,19 @@ class Admin_Update extends CI_Controller {
 
 			$arr = "";
 
+			$nama = addslashes($this->security->xss_clean($this->input->post('update_nama')));
+			$price = addslashes($this->security->xss_clean($this->input->post('update_price')));
+			$stock = addslashes($this->security->xss_clean($this->input->post('update_stock')));
+			$dev = addslashes($this->security->xss_clean($this->input->post('update_dev')));
+			$desc = addslashes($this->security->xss_clean($this->input->post('update_desc')));
+
+			if(fnmatch("*[[]removed[]]*", $nama) || fnmatch("*[[]removed[]]*", $price) || fnmatch("*[[]removed[]]*", $stock) || fnmatch("*[[]removed[]]*", $dev) || fnmatch("*[[]removed[]]*", $desc)){
+				$this->session->set_userdata('update', 'gagal');
+				$_POST = NULL;
+				$_GET= NULL;
+				redirect(base_url() . "Admin_Update");
+			}
+
 			if($product_validate[0]['productName'] != $product[0]['productName']){
 				echo $product_validate[$i] . "<br>";
 				$this->session->set_userdata('update', 'sama');

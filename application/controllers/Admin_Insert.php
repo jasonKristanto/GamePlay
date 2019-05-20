@@ -10,7 +10,7 @@ class Admin_Insert extends CI_Controller {
 
 	public function index()
 	{
-		if(!$this->session->userdata('admin')) redirect(base_url() . 'Admin'); 
+		if(!$this->session->userdata('admin')) redirect(base_url() . 'Admin');
 
 		$data['js'] = $this->load->view('include/javascript.php', NULL, TRUE);
 		$data['css'] = $this->load->view('include/css.php', NULL, TRUE);
@@ -29,7 +29,18 @@ class Admin_Insert extends CI_Controller {
 			redirect(base_url() . 'Admin');
 		}
 		else if ($this->input->post('Submit')){
-			//redirect(base_url() . 'Admin');
+			$nama = addslashes($this->security->xss_clean($this->input->post('insert_nama')));
+			$price = addslashes($this->security->xss_clean($this->input->post('insert_price')));
+			$stock = addslashes($this->security->xss_clean($this->input->post('insert_stock')));
+			$dev = addslashes($this->security->xss_clean($this->input->post('insert_dev')));
+			$desc = addslashes($this->security->xss_clean($this->input->post('insert_desc')));
+
+			if(fnmatch("*[[]removed[]]*", $nama) || fnmatch("*[[]removed[]]*", $price) || fnmatch("*[[]removed[]]*", $stock) || fnmatch("*[[]removed[]]*", $dev) || fnmatch("*[[]removed[]]*", $desc)){
+				$this->session->set_userdata('insert', 'gagal');
+				$_POST = NULL;
+				$_GET= NULL;
+				redirect(base_url() . "Admin_Insert");
+			}
 
 			$products = $this->Admin_Insert_Model->get_products($this->input->post('insert_nama'));
 

@@ -34,9 +34,21 @@
 						<div class="box-body">
 							<div class="col-md-12">
 								<div class="row" style="margin-bottom:5px;">
-									<label class="col-md-12 col-form-label" style="vertical-align:middle;">Tanggal Transaksi</label>
+									<label class="col-md-3 col-form-label" style="vertical-align:middle;">Tanggal Transaksi</label>
+									<label class="col-md-3 col-form-label" style="vertical-align:middle;">Nama Penerima</label>
+									<label class="col-md-3 col-form-label" style="vertical-align:middle;">Nomor Handphone Penerima</label>
+									<label class="col-md-3 col-form-label" style="vertical-align:middle;">Alamat Penerima</label>
 									<div class="">
-										<p class="col-md-12 col-form-label" style="vertical-align:middle;"><?php echo date("F d, h:i A", $trans_detail[0]['tanggalTransaksi']); ?></p>
+										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo date("F d, h:i A", $trans_detail[0]['tanggalTransaksi']); ?></p>
+									</div>
+									<div class="">
+										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $trans_detail[0]['nama_penerima']; ?></p>
+									</div>
+									<div class="">
+										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $trans_detail[0]['noHP_penerima']; ?></p>
+									</div>
+									<div class="">
+										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $trans_detail[0]['alamat_penerima']; ?></p>
 									</div>
 								</div>
 								<div class="row" style="margin-bottom:5px;">
@@ -56,7 +68,7 @@
 										<p class="col-md-3 col-form-label" style="vertical-align:middle;"><?php echo $trans_detail[0]['jenis_pembayaran']; ?></p>
 									</div>
 									<div class="">
-										<p class="col-md-9 col-form-label" style="vertical-align:middle;"<?php echo number_format($total+$trans_detail[0]['biaya_kirim'], 2); ?></p>
+										<p class="col-md-9 col-form-label" style="vertical-align:middle;">Rp. <?php echo number_format($total+$trans_detail[0]['biaya_kirim'], 2); ?></p>
 									</div>
 								</div>
 							</div>

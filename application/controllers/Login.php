@@ -23,23 +23,32 @@ class Login extends CI_Controller {
 	}
 
   public function login(){
-    $login_user = $this->Login_Model->get_user($_POST['login_username'], $_POST['login_password']);
-		if(sizeof($login_user) == 0){
+		$username = addslashes($this->security->xss_clean($_POST['login_username']));
+		$pass = addslashes($this->security->xss_clean($_POST['login_password']));
+
+		if (strpos($username, "[removed]") !== false || strpos($pass, "[removed]") !== false) {
 			$this->session->set_userdata('login', 'gagal');
 			redirect(base_url() . "Login");
 		}
-		else if(sizeof($login_user) > 0){
-			$user = array(
-				'id' => $login_user[0]['id'],
-				'nama'  => $login_user[0]['nama'] ,
-				'username' => $login_user[0]['username'],
-				'email' => $login_user[0]['email'],
-				'login' => 'sukses'
-			);
-			$this->session->set_userdata($user);
-			$_POST = NULL;
-			$_GET= NULL;
-			redirect(base_url());
+		else {
+	    $login_user = $this->Login_Model->get_user($_POST['login_username'], $_POST['login_password']);
+			if(sizeof($login_user) == 0){
+				$this->session->set_userdata('login', 'gagal');
+				redirect(base_url() . "Login");
+			}
+			else if(sizeof($login_user) > 0){
+				$user = array(
+					'id' => $login_user[0]['id'],
+					'nama'  => $login_user[0]['nama'] ,
+					'username' => $login_user[0]['username'],
+					'email' => $login_user[0]['email'],
+					'login' => 'sukses'
+				);
+				$this->session->set_userdata($user);
+				$_POST = NULL;
+				$_GET= NULL;
+				redirect(base_url());
+			}
 		}
   }
 

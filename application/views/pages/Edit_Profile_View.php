@@ -16,7 +16,7 @@
 					<h2 class="modal-title text-center"><span style="color:black;">Edit Profile</h2>
 				</div>
 				<div class="box-body">
-					<h5 id='updateFailed' class="text-center" style="color:red;"></h5>
+					<h5 id='editFailed' class="text-center" style="color:red;"></h5>
 
 					<form class="form-signup" method="POST" action="<?php echo base_url() . "User_Profile/edit_action"; ?>" enctype="multipart/form-data">
 						<div class="form-group" style="margin-top:20px;">
@@ -42,13 +42,15 @@
 									<label class="col-sm-2 col-sm-offset-2 col-form-label" for="update_id">Confirm Password</label>
 									<div class="col-sm-6 col-8 col-offset-2">
 										<input type="password" class="form-control" name="edit_retypepassword" value="">
-										<?php if(isset($error)) 
-											echo "<h5 class='alert alert-warning'>". $error. "</h5>";
+										<?php if($this->session->editPass == 'gagal'){
+														echo "<h5 class='alert alert-warning'>". $error. "</h5>";
+														$this->session->unset_userdata('editPass');
+													}
 										?>
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="form-group" style="margin-top:20px;">
 								<div class="form-group row">
 									<label class="col-sm-2 col-sm-offset-2 col-form-label" for="update_id">Nama</label>
@@ -72,8 +74,10 @@
 									<label class="col-sm-2 col-sm-offset-2 col-form-label" for="update_id">Nomor Handphone</label>
 									<div class="col-sm-6 col-8 col-offset-2">
 										<input type="text" class="form-control" name="edit_HP" value="<?php echo $user[0]['nomor_handphone']; ?>">
-										<?php if(isset($errorNum)) 
-											echo "<h5 class='alert alert-warning'>". $errorNum. "</h5>";
+										<?php if($this->session->editHP == "gagal"){
+														echo "<h5 class='alert alert-warning'>". $errorNum. "</h5>";
+														$this->session->unset_userdata('editHP');
+													}
 										?>
 									</div>
 								</div>

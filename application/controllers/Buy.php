@@ -30,6 +30,36 @@ class Buy extends CI_Controller {
 	}
 
 	public function checkout(){
+		$nama = addslashes($this->security->xss_clean($this->input->post('checkout_nama')));
+		$noHP = addslashes($this->security->xss_clean($this->input->post('checkout_HP')));
+		$alamat = addslashes($this->security->xss_clean($this->input->post('checkout_alamat')));
+		$kirim = addslashes($this->security->xss_clean($this->input->post('checkout_kirim')));
+		$bayar = addslashes($this->security->xss_clean($this->input->post('checkout_bayar')));
+		$total_bayar = addslashes($this->security->xss_clean($this->input->post('checkout_total_bayar')));
+		$total = addslashes($this->security->xss_clean($this->input->post('checkout_total')));
+
+		echo $nama . "<br>";
+		echo $noHP . "<br>";
+		echo $alamat . "<br>";
+		echo $kirim . "<br>";
+		echo $bayar . "<br>";
+		echo $total_bayar . "<br>";
+		echo $total . "<br>";
+
+		if (strpos($nama, "[removed]") !== false || strpos($noHP, "[removed]") !== false || strpos($alamat, "[removed]") !== false || strpos($kirim, "[removed]") !== false || strpos($bayar, "[removed]") !== false || strpos($total_bayar, "[removed]") !== false || strpos($total, "[removed]") !== false) {
+			$this->session->set_userdata('checkout', 'gagal');
+			redirect(base_url() . "Buy");
+		}
+
+		if(!is_numeric($noHP) || !(strlen($noHP) != 0 && strlen($noHP) >= 10 && strlen($noHP) <= 12)){
+			$this->session->set_userdata('checkout', 'gagal');
+			redirect(base_url() . "Buy");
+		}
+
+		echo "<pre>";
+		print_r($_POST);
+		echo "</pre>";
+
 		date_default_timezone_set("Asia/Jakarta");
 		$timestamp = time();
 
@@ -62,25 +92,32 @@ class Buy extends CI_Controller {
 		$trans_detail = array();
 		$update_stock = array();
 
-		$grand_total = $_POST['checkout_total'] + $_POST['checkout_kirim'];
+		$grand_total = $total + $kirim;
 		$last_ID_trans = (int)$last_ID_trans[0]['ID_trans'] + 1;
 
-		if($_POST['checkout_kirim'] == 10000){
+		if($kirim == 10000){
 			$jenis_kirim = "Reguler";
 		}
-		else if($_POST['checkout_kirim'] == 20000){
+		else if($kirim == 20000){
 			$jenis_kirim = "Express";
 		}
 
 		$trans = array(
 			'ID_Cust' => $ID_Cust[0]['id'],
+			'nama_penerima' => $nama,
+			'noHP_penerima' => $noHP,
+			'alamat_penerima' => $alamat,
 			'tanggalTransaksi' => $timestamp,
-			'total' => $_POST['checkout_total'],
+			'total' => $total,
 			'jenis_kirim' => $jenis_kirim,
-			'biaya_kirim' => $_POST['checkout_kirim'],
-			'jenis_pembayaran' =>$_POST['checkout_bayar'],
+			'biaya_kirim' => $kirim,
+			'jenis_pembayaran' => $bayar,
 			'grand_total' => $grand_total
 		);
+
+		echo "<pre>";
+		print_r($trans);
+		echo "</pre>";
 
 		for ($i=0; $i < sizeof($checkout_product); $i++) {
 			$temp = array(
