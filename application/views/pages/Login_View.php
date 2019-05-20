@@ -41,7 +41,7 @@
 		}
 		.card {
 			float: auto;
-			margin: 0 auto;
+			margin: 2% auto 2%;
 			background: #EEEEEE;
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 			border-radius: 5px;

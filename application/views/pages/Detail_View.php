@@ -87,7 +87,7 @@
 			}
 			.card {
 				float: auto;
-				margin: 0 auto 0;
+				margin: 3% auto 3%;
 				padding: 2%;
 				width: 100%;
 				background: #EEEEEE;
