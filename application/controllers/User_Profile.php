@@ -66,7 +66,7 @@ class User_Profile extends CI_Controller {
 			$errorbool = 1;
 		}
 
-		if(!is_numeric($nomor_handphone) || !(strlen($nomor_handphone) != 0 && strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
+		if(!is_numeric($nomor_handphone) || !(strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
 			$this->session->set_userdata('edit', 'gagal');
 			$this->session->set_userdata('editHP', 'gagal');
 			$errorbool = 1;
@@ -140,9 +140,9 @@ class User_Profile extends CI_Controller {
 					'picture' => $this->upload->data()['file_name']
 	      );
 			}
-			echo "<pre>";
-			print_r( $values);
-			echo "</pre>";
+			// echo "<pre>";
+			// print_r( $values);
+			// echo "</pre>";
 
 			$user_validate = $this->User_Model->get_user_validate($values);
 
@@ -157,9 +157,9 @@ class User_Profile extends CI_Controller {
 						$_POST = NULL;
 						$_GET= NULL;
 						redirect(base_url() . "User_Profile/edit_profile");
-						echo "masuk";
+						// echo "masuk";
 					}
-					echo "<br>";
+					// echo "<br>";
 				}
 			}
 
@@ -186,7 +186,7 @@ class User_Profile extends CI_Controller {
 				$this->session->set_userdata('editPass', 'gagal');
 			}
 
-			if(!is_numeric($nomor_handphone)){
+			if(!is_numeric($nomor_handphone) || !(strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
 				$this->session->set_userdata('editHP', 'gagal');
 			}
 

@@ -28,9 +28,9 @@
 					</div>
 
 					<?php
-						if($this->session->signUp_HP == 'gagal'){
+						if($this->session->signUp_password == 'gagal'){
 							echo "<h5 class='alert alert-warning text-center'>". $error. "</h5>";
-							$this->session->unset_userdata('signUp_HP');
+							$this->session->unset_userdata('signUp_password');
 						}
 					?>
 
@@ -47,9 +47,9 @@
 					</div>
 
 					<?php
-						if($this->session->signUp_password == 'gagal') {
+						if($this->session->signUp_HP == 'gagal') {
 							echo "<h5 class='alert alert-warning text-center'>". $errorNum. "</h5>";
-							$this->session->unset_userdata('signUp_password');
+							$this->session->unset_userdata('signUp_HP');
 						}
 					?>
 

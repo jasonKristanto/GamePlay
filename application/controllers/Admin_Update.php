@@ -108,14 +108,14 @@ class Admin_Update extends CI_Controller {
 						'picture' => $this->upload->data()['file_name'],
 						'genreID' => $arr
 					);
-					echo "<pre>";
-					print_r($this->upload->data());
-					echo "</pre>";
+					// echo "<pre>";
+					// print_r($this->upload->data());
+					// echo "</pre>";
         }
         else {
-					echo "<pre>";
-					print_r($this->upload->display_errors());
-					echo "</pre>";
+					// echo "<pre>";
+					// print_r($this->upload->display_errors());
+					// echo "</pre>";
 					$this->session->set_userdata('update', 'gagal');
 					$_POST = NULL;
 					redirect(base_url() . "Admin_Update?product_id =" . $_GET['id']);

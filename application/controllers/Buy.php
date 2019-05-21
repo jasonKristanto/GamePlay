@@ -38,13 +38,13 @@ class Buy extends CI_Controller {
 		$total_bayar = addslashes($this->security->xss_clean($this->input->post('checkout_total_bayar')));
 		$total = addslashes($this->security->xss_clean($this->input->post('checkout_total')));
 
-		echo $nama . "<br>";
-		echo $noHP . "<br>";
-		echo $alamat . "<br>";
-		echo $kirim . "<br>";
-		echo $bayar . "<br>";
-		echo $total_bayar . "<br>";
-		echo $total . "<br>";
+		// echo $nama . "<br>";
+		// echo $noHP . "<br>";
+		// echo $alamat . "<br>";
+		// echo $kirim . "<br>";
+		// echo $bayar . "<br>";
+		// echo $total_bayar . "<br>";
+		// echo $total . "<br>";
 
 		if (strpos($nama, "[removed]") !== false || strpos($noHP, "[removed]") !== false || strpos($alamat, "[removed]") !== false || strpos($kirim, "[removed]") !== false || strpos($bayar, "[removed]") !== false || strpos($total_bayar, "[removed]") !== false || strpos($total, "[removed]") !== false) {
 			$this->session->set_userdata('checkout', 'gagal');
@@ -56,14 +56,14 @@ class Buy extends CI_Controller {
 			redirect(base_url() . "Buy");
 		}
 
-		echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";
+		// echo "<pre>";
+		// print_r($_POST);
+		// echo "</pre>";
 
 		date_default_timezone_set("Asia/Jakarta");
 		$timestamp = time();
 
-		echo date("F d, h:i A", $timestamp);
+		// echo date("F d, h:i A", $timestamp);
 
 		if(!isset($this->session->nama)){
 			redirect(base_url() . "Login");
@@ -73,9 +73,9 @@ class Buy extends CI_Controller {
 		$last_ID_trans = $this->Buy_Model->get_ID_trans();
 		$checkout_product = $this->Buy_Model->get_products($ID_Cust[0]['id']);
 
-		echo "<pre>";
-		print_r($checkout_product);
-		echo "</pre>";
+		// echo "<pre>";
+		// print_r($checkout_product);
+		// echo "</pre>";
 
 		if(sizeof($checkout_product) <= 0){
 			$this->session->set_userdata('checkout', 'gagal');
@@ -115,9 +115,9 @@ class Buy extends CI_Controller {
 			'grand_total' => $grand_total
 		);
 
-		echo "<pre>";
-		print_r($trans);
-		echo "</pre>";
+		// echo "<pre>";
+		// print_r($trans);
+		// echo "</pre>";
 
 		for ($i=0; $i < sizeof($checkout_product); $i++) {
 			$temp = array(

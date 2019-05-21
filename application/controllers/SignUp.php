@@ -27,9 +27,9 @@ class SignUp extends CI_Controller {
 		$data['header'] = $this->load->view('pages/header.php', NULL, TRUE);
 		$data['footer'] = $this->load->view('pages/footer.php', NULL, TRUE);
 
-		echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";
+		// echo "<pre>";
+		// print_r($_POST);
+		// echo "</pre>";
 
 		$username = addslashes($this->security->xss_clean($this->input->post('signup_username')));
 		$password = addslashes($this->security->xss_clean($this->input->post('signup_password')));
@@ -39,20 +39,21 @@ class SignUp extends CI_Controller {
 		$noHP = addslashes($this->security->xss_clean($this->input->post('signup_HP')));
 		$alamat = addslashes($this->security->xss_clean($this->input->post('signup_alamat')));
 
-		echo $username . "<br>";
-		echo $password . "<br>";
-		echo $conf_pass . "<br>";
-		echo $nama . "<br>";
-		echo $email . "<br>";
-		echo $noHP . "<br>";
-		echo $alamat . "<br>";
+		// echo $username . "<br>";
+		// echo $password . "<br>";
+		// echo $conf_pass . "<br>";
+		// echo $nama . "<br>";
+		// echo $email . "<br>";
+		// echo $noHP . "<br>";
+		// echo $alamat . "<br>";
 
-		if (strpos($username, "[removed]") !== false || strpos($password, "[removed]") !== false || strpos($conf_pass, "[removed]") !== false || strpos($nama, "[removed]") !== false || strpos($email, "[removed]") !== false || strpos($noHP, "[removed]") !== false || strpos($alamat, "[removed]") !== false) {
-			$this->session->set_userdata('signUp', 'gagal');
-			redirect(base_url() . "SignUp");
+		if($this->input->post('Cancel')){
+			$_POST = NULL;
+			$_GET= NULL;
+			redirect(base_url());
 		}
 
-		if(!is_numeric($noHP)){
+		if (strpos($username, "[removed]") !== false || strpos($password, "[removed]") !== false || strpos($conf_pass, "[removed]") !== false || strpos($nama, "[removed]") !== false || strpos($email, "[removed]") !== false || strpos($noHP, "[removed]") !== false || strpos($alamat, "[removed]") !== false) {
 			$this->session->set_userdata('signUp', 'gagal');
 			redirect(base_url() . "SignUp");
 		}
@@ -89,14 +90,15 @@ class SignUp extends CI_Controller {
 				$this->session->set_userdata('signUp', 'gagal');
 				$_POST = NULL;
 				$_GET= NULL;
-	      redirect(base_url() . "SignUp");
+				if($password != $conf_pass){
+					$this->session->set_userdata('signUp_password', 'gagal');
+				}
+				if(!is_numeric($noHP) || !(strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
+					$this->session->set_userdata('signUp_HP', 'gagal');
+				}
+				redirect(base_url() . "SignUp");
 			}
     }
-		else if($this->input->post('Cancel')){
-			$_POST = NULL;
-			$_GET= NULL;
-			redirect(base_url());
-		}
     else {
 			$this->session->set_userdata('signUp', 'gagal');
 			$_POST = NULL;
@@ -104,7 +106,7 @@ class SignUp extends CI_Controller {
 			if($password != $conf_pass){
 				$this->session->set_userdata('signUp_password', 'gagal');
 			}
-			if(!is_numeric($noHP)){
+			if(!is_numeric($noHP) || !(strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
 				$this->session->set_userdata('signUp_HP', 'gagal');
 			}
 			redirect(base_url() . "SignUp");
