@@ -54,6 +54,7 @@ class User_Profile extends CI_Controller {
 		$user = $this->User_Model->get_user($this->session->username);
 		$username = addslashes($this->security->xss_clean($this->input->post('edit_username')));
 		$password = addslashes($this->security->xss_clean($this->input->post('edit_password')));
+		$errorbool = 0;
 		$repas =  addslashes($this->security->xss_clean($this->input->post('edit_retypepassword')));
 		$nama = addslashes($this->security->xss_clean($this->input->post('edit_nama')));
 		$nomor_handphone = addslashes($this->security->xss_clean($this->input->post('edit_HP')));
@@ -62,15 +63,27 @@ class User_Profile extends CI_Controller {
 
 		if (strpos($username, "[removed]") !== false || strpos($password, "[removed]") !== false || strpos($repas, "[removed]") !== false || strpos($nama, "[removed]") !== false || strpos($email, "[removed]") !== false || strpos($nomor_handphone, "[removed]") !== false || strpos($alamat, "[removed]") !== false) {
 			$this->session->set_userdata('edit', 'gagal');
+			$errorbool = 1;
 		}
 
 		if(!is_numeric($nomor_handphone) || !(strlen($nomor_handphone) != 0 && strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
 			$this->session->set_userdata('edit', 'gagal');
 			$this->session->set_userdata('editHP', 'gagal');
+			$errorbool = 1;
+		}
+
+		if($password != $repas && strlen($this->input->post('edit_retypepassword')) > 0){
+			$this->session->set_userdata('edit', 'gagal');
+			$this->session->set_userdata('editPass', 'gagal');
+			$errorbool = 1;
 		}
 
 		if(strlen($this->input->post('edit_retypepassword')) <= 0){
 			$repas = $user[0]['password'];
+		}
+
+		if($errorbool == 1){
+			redirect(base_url() . "User_Profile/edit_profile");
 		}
 
 		if($this->input->post('Submit') && $password == $repas){
