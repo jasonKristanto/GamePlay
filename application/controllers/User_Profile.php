@@ -65,12 +65,8 @@ class User_Profile extends CI_Controller {
 		}
 
 		if(!is_numeric($nomor_handphone) || !(strlen($nomor_handphone) != 0 && strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
-			
+			$this->session->set_userdata('edit', 'gagal');
 			$this->session->set_userdata('editHP', 'gagal');
-		}
-
-		if($password != $repas){
-			$this->session->set_userdata('editPass', 'gagal');
 		}
 
 		if(strlen($this->input->post('edit_retypepassword')) <= 0){
