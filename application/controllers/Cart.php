@@ -33,7 +33,7 @@ class Cart extends CI_Controller {
 		$ID_Cust = $this->Cart_Model->get_ID_cust($this->session->username);
 		$product = $this->Cart_Model->get_product($_GET['id']);
 		$product_cart = $this->Cart_Model->get_product_cart($_GET['id'], $ID_Cust[0]['id']);
-		print_r($ID_Cust[0]['id']);
+		//print_r($ID_Cust[0]['id']);
 		$qty = $_GET['qty'];
 
 		if(sizeof($product_cart) > 0){
