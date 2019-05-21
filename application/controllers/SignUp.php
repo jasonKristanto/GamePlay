@@ -93,7 +93,7 @@ class SignUp extends CI_Controller {
 				if($password != $conf_pass){
 					$this->session->set_userdata('signUp_password', 'gagal');
 				}
-				if(!is_numeric($noHP) || !(strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
+				if(!is_numeric($noHP) || !(strlen($noHP) >= 10 && strlen($noHP) <= 12)){
 					$this->session->set_userdata('signUp_HP', 'gagal');
 				}
 				redirect(base_url() . "SignUp");
@@ -106,7 +106,7 @@ class SignUp extends CI_Controller {
 			if($password != $conf_pass){
 				$this->session->set_userdata('signUp_password', 'gagal');
 			}
-			if(!is_numeric($noHP) || !(strlen($nomor_handphone) >= 10 && strlen($nomor_handphone) <= 12)){
+			if(!is_numeric($noHP) || !(strlen($noHP) >= 10 && strlen($noHP) <= 12)){
 				$this->session->set_userdata('signUp_HP', 'gagal');
 			}
 			redirect(base_url() . "SignUp");
