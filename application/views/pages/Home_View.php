@@ -83,6 +83,7 @@
 		.product {
 			background: #EEEEEE;
 			padding: 30px;
+			height:100%;
 			border-radius: 3px;
 			box-sizing: border-box;
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
@@ -100,6 +101,9 @@
 			color: #5FA4CC;
 			margin-bottom: 10px;
 			display: block;
+		}
+		.product-img{
+			min-height:248px;
 		}
 		.product-img > img{
 			width:100%;
